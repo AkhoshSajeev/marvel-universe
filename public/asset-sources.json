@@ -1,0 +1,93 @@
+{
+  "notice": "Unofficial fan project. Marvel characters, imagery and movie posters belong to Marvel Studios and their respective rights holders. No ownership claimed. Verify usage rights before commercial publication.",
+  "assets": [
+    {
+      "file": "images/hero.jpg",
+      "source": "https://images.hdqwalls.com/wallpapers/4k-iron-man-endgame-2020-xi.jpg",
+      "sourcePage": "https://hdqwalls.com/4k-iron-man-endgame-2020-wallpaper",
+      "description": "Iron Man Endgame cinematic wallpaper, HDQWalls; resized to 2560 px"
+    },
+    {
+      "file": "images/hero-official.jpg",
+      "source": "https://cdn.marvel.com/content/1x/002irm_ons_mas_dsk_02.jpg",
+      "sourcePage": "https://www.marvel.com/characters/iron-man-tony-stark/on-screen",
+      "description": "Official Marvel Iron Man still"
+    },
+    {
+      "file": "images/iron-man.jpg",
+      "source": "https://cdn.marvel.com/content/2x/002irm_ons_crd_03.jpg",
+      "sourcePage": "https://www.marvel.com/characters/iron-man-tony-stark/on-screen",
+      "description": "Official Marvel on-screen character portrait; cropped 124 px from top to remove website category label"
+    },
+    {
+      "file": "images/captain-america.jpg",
+      "source": "https://cdn.marvel.com/content/2x/003cap_ons_crd_03.jpg",
+      "sourcePage": "https://www.marvel.com/characters/captain-america-steve-rogers/on-screen",
+      "description": "Official Marvel on-screen character portrait; cropped 124 px from top to remove website category label"
+    },
+    {
+      "file": "images/thor.jpg",
+      "source": "https://cdn.marvel.com/content/2x/004tho_ons_crd_03.jpg",
+      "sourcePage": "https://www.marvel.com/characters/thor-thor-odinson/on-screen",
+      "description": "Official Marvel on-screen character portrait; cropped 124 px from top to remove website category label"
+    },
+    {
+      "file": "images/black-widow.jpg",
+      "source": "https://cdn.marvel.com/content/2x/011blw_ons_crd_03.jpg",
+      "sourcePage": "https://www.marvel.com/characters/black-widow-natasha-romanoff/on-screen",
+      "description": "Official Marvel on-screen character portrait; cropped 124 px from top to remove website category label"
+    },
+    {
+      "file": "images/hulk.jpg",
+      "source": "https://cdn.marvel.com/content/2x/006hbb_ons_crd_02.jpg",
+      "sourcePage": "https://www.marvel.com/characters/hulk-bruce-banner/on-screen",
+      "description": "Official Marvel on-screen character portrait; cropped 124 px from top to remove website category label"
+    },
+    {
+      "file": "images/hawkeye.jpg",
+      "source": "https://cdn.marvel.com/content/2x/018hcb_ons_crd_02.jpg",
+      "sourcePage": "https://www.marvel.com/characters/hawkeye-clint-barton/on-screen",
+      "description": "Official Marvel on-screen character portrait; cropped 124 px from top to remove website category label"
+    },
+    {
+      "file": "images/movie-avengers.jpg",
+      "source": "https://cdn.marvel.com/content/2x/theavengers_lob_crd_03.jpg",
+      "sourcePage": "https://www.marvel.com/movies/the-avengers",
+      "description": "Official Marvel movie poster"
+    },
+    {
+      "file": "images/movie-age-of-ultron.jpg",
+      "source": "https://cdn.marvel.com/content/2x/avengersageofultron_lob_crd_03.jpg",
+      "sourcePage": "https://www.marvel.com/movies/avengers-age-of-ultron",
+      "description": "Official Marvel movie poster"
+    },
+    {
+      "file": "images/movie-infinity-war.jpg",
+      "source": "https://cdn.marvel.com/content/2x/avengersinfinitywar_lob_crd_02_1.jpg",
+      "sourcePage": "https://www.marvel.com/movies/avengers-infinity-war",
+      "description": "Official Marvel movie poster"
+    },
+    {
+      "file": "images/movie-endgame.jpg",
+      "source": "https://cdn.marvel.com/content/2x/avengersendgame_lob_crd_05.jpg",
+      "sourcePage": "https://www.marvel.com/movies/avengers-endgame",
+      "description": "Official Marvel movie poster"
+    }
+  ],
+  "fonts": [
+    {
+      "family": "Barlow Condensed",
+      "source": "https://github.com/google/fonts/tree/main/ofl/barlowcondensed",
+      "license": "SIL Open Font License 1.1",
+      "licenseFile": "fonts/barlow-condensed-OFL.txt",
+      "licenseSource": "https://raw.githubusercontent.com/google/fonts/main/ofl/barlowcondensed/OFL.txt"
+    },
+    {
+      "family": "Inter",
+      "source": "https://github.com/google/fonts/tree/main/ofl/inter",
+      "license": "SIL Open Font License 1.1",
+      "licenseFile": "fonts/inter-OFL.txt",
+      "licenseSource": "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/OFL.txt"
+    }
+  ]
+}
