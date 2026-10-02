@@ -11,7 +11,7 @@ export function Saga({ onSelect }: { onSelect: (movie: Movie) => void }) {
       <div className="section-heading page-gutter" data-reveal>
         <div>
           <div className="section-kicker">
-            <span>02</span> A LEGACY IN THE MAKING
+            <span>07</span> A LEGACY IN THE MAKING
           </div>
           <h2 id="saga-title">
             EVERY CHAPTER.

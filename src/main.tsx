@@ -4,6 +4,7 @@ import App from "./App";
 import "./styles.css";
 import "./cinema.css";
 import "./dossier.css";
+import "./explorer.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

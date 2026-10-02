@@ -21,6 +21,7 @@ export function Navigation() {
   const links = [
     { id: "overview", title: "Overview" },
     { id: "avengers", title: "The Avengers" },
+    { id: "timeline", title: "Timeline" },
     { id: "saga", title: "The Saga" },
   ];
   useEffect(() => {
@@ -123,7 +124,13 @@ export function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
           >
-            {links.map((link, index) => (
+            {[
+              ...links,
+              { id: "teams", title: "Team lineups" },
+              { id: "connections", title: "Connections" },
+              { id: "threats", title: "The threats" },
+              { id: "infinity", title: "Infinity Stones" },
+            ].map((link, index) => (
               <a
                 key={link.id}
                 href={`#${link.id}`}

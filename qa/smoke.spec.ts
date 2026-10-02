@@ -17,7 +17,9 @@ test("the cinematic entry point and all eighteen portraits load under the Pages 
   await page.goto("./");
   await expect(page).toHaveTitle("Marvel Universe — The Avengers");
   await expect(
-    page.getByRole("heading", { name: "THE AVENGERS", exact: true }),
+    page
+      .locator("#overview")
+      .getByRole("heading", { name: "THE AVENGERS", exact: true }),
   ).toBeVisible();
   await expect(page.locator(".character-portal")).toHaveCount(18);
   await expect(
@@ -59,8 +61,8 @@ test("the two hero calls to action lead to the character archive and film saga",
   await page
     .getByRole("link", { name: "EXPLORE THE MCU", exact: true })
     .click();
-  await expect(page).toHaveURL(/#saga$/);
-  await expect(page.locator("#saga-title")).toBeInViewport();
+  await expect(page).toHaveURL(/#timeline$/);
+  await expect(page.locator("#timeline-title")).toBeInViewport();
 });
 
 test("character dossiers navigate the expanded roster and wrap correctly", async ({

@@ -131,7 +131,7 @@ export function Hero() {
           <a className="button button-red" href="#avengers">
             EXPLORE THE AVENGERS <ArrowUpRight size={18} />
           </a>
-          <a className="button cinema-secondary" href="#saga">
+          <a className="button cinema-secondary" href="#timeline">
             <Orbit size={16} />
             EXPLORE THE MCU <ArrowUpRight size={16} />
           </a>

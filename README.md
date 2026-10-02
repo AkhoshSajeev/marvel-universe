@@ -34,6 +34,8 @@ If you rename the repository, update `base` in `vite.config.ts`. Assets in `publ
 - `src/styles.css` defines shared typography, navigation, and the film archive.
 - `src/cinema.css` defines the cinematic hero and character archive.
 - `src/dossier.css` defines the full-screen character experience.
+- `src/explorer.css` styles the timeline, formations, network, threats and stones.
+- `src/data/timeline.ts`, `connections.ts`, `threats.ts`, and `stones.ts` hold the universe exploration content.
 - `public/` contains static imagery and assets.
 - `.github/workflows/deploy.yml` builds and deploys the static site.
 
@@ -58,4 +60,14 @@ npm run test:e2e
 
 The Playwright smoke tests run against the production preview and cover local asset loading, hero navigation, search and filters, full-screen dialog focus, ability selection, equipment, timeline scrolling, trailer integration, mobile navigation, and responsive layouts. The trailer test mocks YouTube's network response; actual video availability depends on YouTube.
 
-# marvel-universe
+## Universe chapters
+
+- **MCU timeline:** all 37 films from Iron Man (2008) through The Fantastic Four: First Steps (July 2025), grouped into six phases. Dates follow US theatrical release order, not in-universe chronology. Film selections reveal local posters, summaries, characters and connections. The four Avengers films retain official trailer playback.
+- **Team formations:** original Avengers, the closing Age of Ultron lineup, and a selected group of Endgame allies. Replayable, staggered entrances respect reduced motion.
+- **Marvel connections:** a curated portrait graph with 18 selectable characters and six relationship categories. Select a node to recenter, filter relationships, or open the center character’s dossier. The adjacent text list describes every displayed edge.
+- **Threats:** nine MCU villain files link directly to hero dossiers and the relevant timeline chapter. Loki’s file focuses on The Avengers (2012); Doctor Doom is explicitly an upcoming Doomsday preview, not a completed storyline.
+- **Infinity Saga:** six glowing, floating crystals reveal powers, appearances and events, with colored connections to Thanos.
+
+The historical film archive has a July 2025 cutoff. The separate Doctor Doom preview uses [Disney’s official Doomsday overview](https://www.disneyplus.com/explore/articles/avengers-doomsday), checked October 2, 2026. Film metadata can be cross-checked against the [official Marvel film archive](https://www.marvel.com/movies). Character and Infinity Stone stories are scoped to the films named in each entry; the relationship archive extends through Endgame and WandaVision as labeled.
+
+The expanded browser suite also checks all 37 timeline images, phase counts, cross-section navigation, every villain, all six stones, relationship filters and keyboard selection, team formation membership, and mobile widths down to 320px. `qa/explorer-visual.mjs` captures desktop and mobile chapter screenshots against the local development server.

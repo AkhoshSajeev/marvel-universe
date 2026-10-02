@@ -7,6 +7,11 @@ import { Navigation, Brand } from "./components/Navigation";
 import { Hero } from "./components/Hero";
 import { Avengers } from "./components/Avengers";
 import { HeroDossier } from "./components/HeroDossier";
+import { MCUTimeline } from "./components/MCUTimeline";
+import { TeamFormation } from "./components/TeamFormation";
+import { Connections } from "./components/Connections";
+import { Threats } from "./components/Threats";
+import { InfinitySaga } from "./components/InfinitySaga";
 import { Saga } from "./components/Saga";
 import { MovieDialog } from "./components/MovieDialog";
 import { type Hero as HeroType, type Movie } from "./data/universe";
@@ -16,6 +21,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function App() {
   const [selectedHero, setSelectedHero] = useState<HeroType | null>(null);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+  const [timelineFilm, setTimelineFilm] = useState("avengers");
   const root = useRef<HTMLDivElement>(null);
   const closeHero = useCallback(() => setSelectedHero(null), []);
   const closeMovie = useCallback(() => setSelectedMovie(null), []);
@@ -33,7 +39,20 @@ export default function App() {
           });
         });
       }, root);
-      return () => ctx.revert();
+      // Film, team and threat selections can change section heights on mobile.
+      let frame = 0;
+      const observer = new ResizeObserver(() => {
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() => ScrollTrigger.refresh());
+      });
+      root.current
+        ?.querySelectorAll("main > section")
+        .forEach((section) => observer.observe(section));
+      return () => {
+        observer.disconnect();
+        cancelAnimationFrame(frame);
+        ctx.revert();
+      };
     });
     return () => media.revert();
   }, []);
@@ -51,6 +70,47 @@ export default function App() {
         <main>
           <Hero />
           <Avengers onSelect={setSelectedHero} />
+          <nav
+            className="universe-chapters page-gutter"
+            aria-label="Explore the universe"
+          >
+            <span>EXPLORE THE UNIVERSE</span>
+            {[
+              ["timeline", "Timeline"],
+              ["teams", "Team lineups"],
+              ["connections", "Connections"],
+              ["threats", "The threats"],
+              ["infinity", "Infinity Stones"],
+            ].map(([id, label], i) => (
+              <a key={id} href={`#${id}`}>
+                <small>0{i + 1}</small>
+                {label}
+                <ArrowUpRight size={14} />
+              </a>
+            ))}
+          </nav>
+          <MCUTimeline
+            onHero={setSelectedHero}
+            onMovie={setSelectedMovie}
+            selected={timelineFilm}
+            setSelected={setTimelineFilm}
+          />
+          <TeamFormation onSelect={setSelectedHero} />
+          <Connections onSelect={setSelectedHero} />
+          <Threats
+            onHero={setSelectedHero}
+            onFilm={(id) => {
+              setTimelineFilm(id);
+              window.location.hash = "timeline";
+              document.getElementById("timeline")?.scrollIntoView({
+                behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+                  .matches
+                  ? "instant"
+                  : "smooth",
+              });
+            }}
+          />
+          <InfinitySaga />
           <Saga onSelect={setSelectedMovie} />
         </main>
         <footer className="site-footer page-gutter">

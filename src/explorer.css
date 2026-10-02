@@ -1,0 +1,1634 @@
+/* Cinematic universe chapters. Scoped selectors preserve the character experience. */
+.universe-chapters {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  border-block: 1px solid var(--line);
+  min-height: 100px;
+  overflow: auto;
+  background: #0d0e11;
+}
+.universe-chapters > span {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #787d88;
+  max-width: 100px;
+  line-height: 1.8;
+  flex-shrink: 0;
+}
+.universe-chapters a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+  font-size: 12px;
+  flex: 1;
+}
+.universe-chapters small {
+  color: var(--red);
+  font-size: 9px;
+}
+.universe-chapters a:hover {
+  color: #ff6268;
+}
+.explorer-label {
+  font-size: 9px;
+  letter-spacing: 1.8px;
+  color: #979da9;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.7;
+}
+.explorer-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 20px;
+}
+.explorer-tabs button {
+  padding: 12px 19px;
+  border: 1px solid #30323a;
+  color: #999eaa;
+  font-size: 11px;
+  background: transparent;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.explorer-tabs button[aria-pressed="true"] {
+  background: #eee;
+  color: #101014;
+  border-color: #eee;
+}
+.explorer-tabs button:hover {
+  border-color: #aaa;
+  color: white;
+}
+.explorer-tabs button[aria-pressed="true"]:hover {
+  color: #101014;
+}
+.explorer-icon-button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #373941;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #121318;
+  color: #ddd;
+}
+.explorer-icon-button:hover:not(:disabled) {
+  background: var(--red);
+  border-color: var(--red);
+}
+.explorer-icon-button:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+.text-action {
+  background: none;
+  border: 0;
+  padding: 12px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: white;
+}
+.text-action:hover {
+  color: var(--red);
+}
+.explorer-footnote {
+  font-size: 10px;
+  color: #838997;
+  line-height: 1.8;
+  margin-top: 20px;
+}
+.explorer-hero-links {
+  margin-block: 24px;
+}
+.explorer-hero-links > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.explorer-hero-links button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 9px 5px 5px;
+  border: 1px solid #ffffff20;
+  background: #ffffff06;
+  color: #d5d8df;
+  font-size: 10px;
+}
+.explorer-hero-links button:hover {
+  border-color: #aaa;
+  background: #ffffff12;
+}
+.explorer-hero-links img {
+  height: 28px;
+  width: 28px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 50%;
+}
+/* A film reel, with a full editorial feature instead of another card grid. */
+.mcu-timeline {
+  background:
+    radial-gradient(ellipse at 5% 55%, #241218 0%, transparent 52%), #0a0b0e;
+}
+.timeline-topline {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  letter-spacing: 1.8px;
+  color: #7f8591;
+  margin-bottom: 25px;
+  gap: 16px;
+}
+.phase-switcher {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  border-bottom: 1px solid #33353b;
+}
+.phase-switcher button {
+  text-align: left;
+  padding: 18px 12px 20px;
+  border: 0;
+  background: transparent;
+  color: #777d89;
+  position: relative;
+}
+.phase-switcher button::after {
+  content: "";
+  height: 2px;
+  background: var(--red);
+  position: absolute;
+  inset: auto 0 -1px;
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+.phase-switcher button[aria-pressed="true"]::after {
+  transform: scaleX(1);
+}
+.phase-switcher button[aria-pressed="true"] {
+  color: white;
+  background: linear-gradient(0deg, #e0202010, transparent);
+}
+.phase-switcher button span {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  display: block;
+}
+.phase-switcher button small {
+  font-size: 10px;
+  display: block;
+  margin-top: 9px;
+  font-weight: 400;
+  color: #9297a2;
+}
+.film-rail {
+  display: flex;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #54525b #15151c;
+  padding: 26px 0 30px;
+  position: relative;
+  scroll-snap-type: x proximity;
+}
+.film-rail button {
+  flex: 0 0 190px;
+  position: relative;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  color: #8d919a;
+  padding: 4px 18px 0 0;
+  scroll-snap-align: center;
+}
+.film-rail button span {
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+.film-rail button i {
+  display: block;
+  width: 7px;
+  height: 7px;
+  background: #484b55;
+  margin: 14px 0;
+  position: relative;
+  border-radius: 50%;
+  z-index: 1;
+}
+.film-rail button::after {
+  content: "";
+  position: absolute;
+  top: 35px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #363740;
+}
+.film-rail button strong {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.6;
+  display: block;
+  max-width: 160px;
+}
+.film-rail button[aria-pressed="true"] {
+  color: #fff;
+}
+.film-rail button[aria-pressed="true"] i {
+  background: #f0444e;
+  box-shadow: 0 0 18px #f0444e;
+}
+.timeline-feature {
+  display: grid;
+  grid-template-columns: minmax(200px, 0.65fr) 1.35fr;
+  max-width: 1120px;
+  margin: 30px auto 0;
+  gap: clamp(30px, 6vw, 100px);
+  align-items: center;
+  min-height: 620px;
+}
+.timeline-art {
+  position: relative;
+  max-width: 370px;
+  width: 100%;
+  justify-self: center;
+}
+.timeline-art:before {
+  content: "";
+  position: absolute;
+  inset: 5% -15%;
+  background: #a7273233;
+  filter: blur(65px);
+  pointer-events: none;
+}
+.timeline-art > img {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  box-shadow: 0 24px 80px #000a;
+  position: relative;
+}
+.timeline-art-index {
+  position: absolute;
+  bottom: -25px;
+  left: -20px;
+  font-family: var(--heading);
+  font-size: 100px;
+  line-height: 1;
+  color: white;
+  text-shadow: 0 4px 30px black;
+}
+.timeline-art-index small {
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #bbc0ca;
+  margin-left: 12px;
+}
+.timeline-story h3 {
+  font-family: var(--heading);
+  font-size: clamp(38px, 4.6vw, 70px);
+  line-height: 0.98;
+  text-transform: uppercase;
+  margin: 20px 0;
+}
+.timeline-story > p {
+  font-size: 14px;
+  line-height: 1.9;
+  color: #a4a8b3;
+  max-width: 550px;
+  margin-bottom: 26px;
+}
+.film-characters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 26px;
+}
+.film-characters > span,
+.film-characters > button {
+  font-size: 10px;
+  color: #c9cdd4;
+  padding: 7px 10px;
+  border: 1px solid #34343c;
+  background: #ffffff03;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.film-characters > button:hover {
+  border-color: #d4545d;
+}
+.film-connections > button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  text-align: left;
+  color: white;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ffffff13;
+  padding: 15px 0;
+  width: 100%;
+}
+.film-connections > button:hover {
+  color: #ff777b;
+}
+.film-connections strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+}
+.film-connections small {
+  font-size: 11px;
+  color: #9096a1;
+  display: block;
+  margin-top: 6px;
+  line-height: 1.6;
+}
+.timeline-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px solid #ffffff14;
+  margin-top: 45px;
+  padding-top: 20px;
+}
+.timeline-bottom > div {
+  display: flex;
+  gap: 8px;
+}
+.timeline-bottom p {
+  font-size: 10px;
+  color: #777e8a;
+}
+.timeline-bottom > a {
+  font-size: 9px;
+  letter-spacing: 1px;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+/* Formation: six dramatic angled portrait columns. */
+.team-section {
+  background: radial-gradient(ellipse at center 75%, #20232d 0%, #0c0d11 67%);
+}
+.formation-replay {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.formation-copy {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  margin: 35px 0;
+}
+.formation-copy h3 {
+  font-family: var(--heading);
+  font-size: clamp(35px, 4vw, 60px);
+  line-height: 1;
+  margin: 12px 0;
+}
+.formation-copy > p {
+  max-width: 460px;
+  font-size: 12px;
+  line-height: 1.9;
+  color: #9b9faa;
+}
+.team-formation {
+  display: flex;
+  height: 460px;
+  gap: 6px;
+  isolation: isolate;
+}
+.team-formation > button {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  border: 0;
+  padding: 0;
+  color: white;
+  background: #15161c;
+  clip-path: polygon(7% 0, 100% 0, 93% 100%, 0 100%);
+  overflow: hidden;
+  transition:
+    flex 0.45s,
+    filter 0.4s;
+  filter: saturate(0.5);
+}
+.team-formation > button:hover,
+.team-formation > button:focus-visible {
+  flex: 1.5;
+  filter: saturate(1.1);
+}
+.team-formation > button:focus-visible {
+  outline-offset: -6px;
+  outline: 3px solid white;
+}
+.team-formation img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: 50% 15%;
+  transition: transform 0.6s;
+}
+.team-formation > button:hover img {
+  transform: scale(1.055);
+}
+.formation-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #07080bed, transparent 65%);
+  border-bottom: 3px solid var(--member-color);
+}
+.member-number {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 11px;
+  color: #fffc;
+  text-shadow: 0 1px 5px #000;
+}
+.member-caption {
+  position: absolute;
+  bottom: 28px;
+  left: 14px;
+  right: 14px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.member-caption strong {
+  font-family: var(--heading);
+  font-size: clamp(22px, 2.2vw, 36px);
+  line-height: 1;
+  text-transform: uppercase;
+}
+.member-caption small {
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #bcc2cc;
+}
+.member-caption svg {
+  color: var(--member-color);
+}
+.formation-baseline {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ffffff16;
+  padding: 25px 0;
+  font-size: 8px;
+  letter-spacing: 1.4px;
+  color: #858b98;
+  gap: 20px;
+}
+/* Selectable portrait constellation, with an accessible textual edge list. */
+.connections-section {
+  background:
+    radial-gradient(ellipse at 25% 45%, #10233288, transparent 60%), #090c10;
+}
+.connection-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.connection-filters button {
+  background: transparent;
+  border: 1px solid #ffffff17;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #8b939e;
+  padding: 10px 13px;
+  font-size: 10px;
+}
+.connection-filters i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--connection-color);
+}
+.connection-filters button[aria-pressed="true"],
+.connection-filters button:hover {
+  border-color: var(--connection-color);
+  color: white;
+  background: #ffffff05;
+}
+.network-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 50px;
+  margin-top: 35px;
+  align-items: center;
+}
+.network-stage {
+  height: 590px;
+  position: relative;
+  background-image: radial-gradient(#7d8ba62b 0.7px, transparent 0.7px);
+  background-size: 23px 23px;
+  isolation: isolate;
+}
+.network-stage > svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  pointer-events: none;
+}
+.network-orbit {
+  position: absolute;
+  border: 1px solid #7d8ba617;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  aspect-ratio: 1;
+  width: 75%;
+  pointer-events: none;
+}
+.orbit-two {
+  width: 45%;
+  border-style: dashed;
+}
+.network-coordinate,
+.network-instruction {
+  position: absolute;
+  color: #627080;
+  font-size: 8px;
+  letter-spacing: 1.2px;
+  left: 0;
+  top: 0;
+}
+.network-instruction {
+  top: auto;
+  bottom: 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.network-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 104px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: white;
+  padding: 0;
+  gap: 8px;
+  z-index: 2;
+}
+.network-node img {
+  height: 65px;
+  width: 65px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  border: 1px solid var(--node-color);
+  padding: 3px;
+  background: #0b1018;
+  box-shadow: 0 0 20px #0009;
+  transition:
+    box-shadow 0.3s,
+    transform 0.3s;
+}
+.network-node:hover img,
+.network-node:focus-visible img {
+  box-shadow: 0 0 25px color-mix(in srgb, var(--node-color), transparent 60%);
+  transform: scale(1.12);
+}
+.network-node strong {
+  font-size: 10px;
+  line-height: 1.4;
+  text-align: center;
+  background: #0c1119c9;
+}
+.network-node small {
+  font-size: 7px;
+  color: var(--node-color);
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+.network-center {
+  width: 125px;
+}
+.network-center img {
+  height: 95px;
+  width: 95px;
+  box-shadow: 0 0 45px #b12c2630;
+  border-width: 2px;
+}
+.network-center strong {
+  font-family: var(--heading);
+  font-size: 25px;
+  text-transform: uppercase;
+}
+.network-details {
+  min-width: 0;
+}
+.network-details h3 {
+  font-family: var(--heading);
+  font-size: 45px;
+  text-transform: uppercase;
+  margin: 12px 0;
+}
+.network-details > p {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #7f8997;
+  max-width: 390px;
+}
+.network-relationship-list {
+  max-height: 405px;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #314253 transparent;
+  margin-top: 25px;
+  padding-right: 12px;
+}
+.network-relationship-list > button {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: #bdc5d2;
+  border: 0;
+  border-bottom: 1px solid #ffffff13;
+  padding: 16px 0;
+}
+.network-relationship-list > button:hover strong {
+  color: white;
+}
+.relationship-tag {
+  font-size: 8px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+.network-relationship-list strong {
+  font-size: 13px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.network-relationship-list button > span:last-child {
+  font-size: 11px;
+  line-height: 1.7;
+  color: #8a95a5;
+}
+.network-empty p {
+  font-size: 12px;
+  color: #a4a9b4;
+  line-height: 1.7;
+}
+.network-roster {
+  display: flex;
+  overflow: auto;
+  gap: 15px;
+  padding: 25px 0 15px;
+  border-top: 1px solid #ffffff16;
+  margin-top: 35px;
+  scrollbar-width: thin;
+  scrollbar-color: #394657 transparent;
+}
+.network-roster button {
+  flex: 0 0 70px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 9px;
+  border: 0;
+  background: transparent;
+  color: #7d8796;
+  padding: 5px;
+}
+.network-roster img {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 50%;
+  filter: grayscale(1);
+  opacity: 0.6;
+  transition: all 0.2s;
+}
+.network-roster button[aria-pressed="true"] img,
+.network-roster button:hover img {
+  opacity: 1;
+  filter: none;
+  box-shadow: 0 0 0 2px #e95e67;
+}
+.network-roster button[aria-pressed="true"] {
+  color: white;
+}
+.network-roster span {
+  font-size: 8px;
+  line-height: 1.5;
+}
+/* Threat archive: colder, bruised violet lighting and oversized cinematic stills. */
+.threats-section {
+  background:
+    radial-gradient(
+      ellipse at 70% 50%,
+      color-mix(in srgb, var(--threat-color), transparent 91%),
+      transparent 65%
+    ),
+    #100c15;
+  transition: background 0.4s;
+}
+.threats-section .section-kicker {
+  color: #ba9ac8;
+}
+.threat-selector {
+  display: flex;
+  overflow: auto;
+  gap: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #6d4e73 transparent;
+  padding-bottom: 18px;
+}
+.threat-selector > button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 162px;
+  background: #ffffff03;
+  border: 1px solid #ffffff13;
+  color: #a9a1b4;
+  padding: 8px;
+  text-align: left;
+}
+.threat-selector > button[aria-pressed="true"] {
+  border-color: var(--threat-color);
+  color: white;
+  background: #ffffff09;
+}
+.threat-selector img {
+  width: 38px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 1px;
+  filter: grayscale(0.65);
+}
+.threat-selector > button[aria-pressed="true"] img {
+  filter: none;
+}
+.threat-selector span {
+  font-size: 12px;
+  line-height: 1.4;
+}
+.threat-selector small {
+  font-size: 6px;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 6px;
+  color: #8b8099;
+}
+.threat-feature {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  min-height: 660px;
+  margin-top: 20px;
+  border-block: 1px solid #ffffff14;
+}
+.threat-portrait {
+  min-height: 640px;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.threat-portrait > img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.7);
+}
+.threat-image-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(0deg, #100c15 0%, #100c1510 60%),
+    linear-gradient(90deg, transparent 70%, #100c15);
+}
+.threat-portrait > div:last-child {
+  position: absolute;
+  bottom: 55px;
+  left: 30px;
+  right: 20px;
+}
+.threat-portrait > div:last-child > span {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--threat-color);
+}
+.threat-portrait h3 {
+  font-family: var(--heading);
+  font-size: clamp(65px, 7vw, 118px);
+  line-height: 0.9;
+  text-transform: uppercase;
+  margin: 20px 0 0;
+  overflow-wrap: break-word;
+}
+.threat-crosshair {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: #ddd0e7;
+  text-shadow: 0 2px 10px black;
+}
+.threat-intel {
+  padding: 45px 0 35px 45px;
+}
+.threat-intel > .explorer-label {
+  color: var(--threat-color);
+}
+.threat-intel h4 {
+  font-size: clamp(20px, 2vw, 28px);
+  font-weight: 400;
+  line-height: 1.4;
+  margin: 20px 0;
+}
+.threat-intel > p {
+  font-size: 12px;
+  color: #a198ae;
+  line-height: 1.9;
+  margin-bottom: 26px;
+}
+.threat-abilities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 26px;
+}
+.threat-abilities li {
+  font-size: 9px;
+  padding: 8px 10px;
+  border: 1px solid #ffffff1c;
+  color: #cbc2d7;
+}
+.threat-conflict {
+  border-left: 1px solid var(--threat-color);
+  padding-left: 16px;
+  margin-block: 20px;
+}
+.threat-conflict p {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #bbb0c8;
+  margin: 8px 0;
+}
+.threat-intel .text-action {
+  color: var(--threat-color);
+}
+/* Six coded crystals orbit the titan. No canvas, video or heavy 3D runtime. */
+.infinity-section {
+  background:
+    radial-gradient(
+      ellipse at 28% 47%,
+      color-mix(in srgb, var(--stone-color), transparent 93%),
+      transparent 57%
+    ),
+    #09090f;
+}
+.infinity-layout {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.stone-universe {
+  height: 650px;
+  position: relative;
+  isolation: isolate;
+}
+.stone-starfield {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(#c8cce754 0.7px, transparent 1px),
+    radial-gradient(#c8cce729 0.6px, transparent 1px);
+  background-size:
+    67px 59px,
+    103px 97px;
+  background-position:
+    0 0,
+    30px 20px;
+  mask-image: radial-gradient(ellipse, #000, transparent 73%);
+}
+.infinity-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 72%;
+  aspect-ratio: 1;
+  border: 1px solid #ffffff12;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow:
+    0 0 65px #9a75ff09,
+    inset 0 0 65px #9a75ff09;
+}
+.stone-thanos {
+  position: absolute;
+  width: 48%;
+  height: 49%;
+  left: 26%;
+  top: 23%;
+  object-fit: cover;
+  object-position: 50% 20%;
+  opacity: 0.52;
+  mask-image: radial-gradient(ellipse, #000 15%, transparent 70%);
+  filter: grayscale(0.45);
+}
+.stone-rays {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.stone-rays line {
+  transition:
+    opacity 0.5s,
+    stroke-width 0.5s;
+}
+.infinity-center {
+  position: absolute;
+  left: 50%;
+  top: 57%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+  text-shadow: 0 4px 20px black;
+}
+.infinity-center > span {
+  font-size: 7px;
+  letter-spacing: 2px;
+  color: #bdb0a4;
+  white-space: nowrap;
+}
+.infinity-center strong {
+  display: block;
+  font-family: var(--heading);
+  font-size: 53px;
+  line-height: 1.1;
+  letter-spacing: 3px;
+  color: #e2d8ce;
+}
+.infinity-center small {
+  font-size: 7px;
+  line-height: 1.8;
+  letter-spacing: 1px;
+  color: #aa9da5;
+  display: block;
+  margin-top: 12px;
+}
+.stone-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: none;
+  color: var(--gem-color);
+  border: 0;
+  width: 105px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 12px 0;
+  z-index: 2;
+}
+.stone-gem {
+  width: 43px;
+  height: 59px;
+  display: block;
+  position: relative;
+  filter: drop-shadow(0 0 12px var(--gem-color));
+  animation: stone-float 4.5s ease-in-out infinite;
+  animation-delay: var(--float-delay);
+  transition: filter 0.35s;
+}
+.stone-gem svg {
+  width: 100%;
+  height: 100%;
+}
+.gem-halo {
+  width: 86px;
+  height: 86px;
+  position: absolute;
+  top: 0;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: radial-gradient(
+    color-mix(in srgb, var(--gem-color), transparent 91%),
+    transparent 70%
+  );
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+.stone-node[aria-pressed="true"] .gem-halo {
+  border-color: color-mix(in srgb, var(--gem-color), transparent 60%);
+  box-shadow: 0 0 50px color-mix(in srgb, var(--gem-color), transparent 83%);
+}
+.stone-node:hover .stone-gem {
+  filter: drop-shadow(0 0 20px var(--gem-color)) brightness(1.3);
+}
+.stone-node strong {
+  font-family: var(--heading);
+  font-size: 21px;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  margin-top: 15px;
+}
+.stone-node small {
+  font-size: 7px;
+  letter-spacing: 1.6px;
+  opacity: 0.6;
+  margin-top: 5px;
+}
+.stone-detail h3 {
+  font-family: var(--heading);
+  font-size: clamp(45px, 5vw, 76px);
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 20px 0;
+  color: var(--stone-color);
+}
+.stone-detail > .explorer-label:first-child {
+  color: var(--stone-color);
+}
+.stone-power {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #bbb7c6;
+  margin-bottom: 28px;
+}
+.stone-detail ol {
+  list-style: none;
+  counter-reset: stone-events;
+  padding: 0;
+  margin: 15px 0 25px;
+}
+.stone-detail li {
+  counter-increment: stone-events;
+  font-size: 12px;
+  color: #a4a0b1;
+  padding: 10px 0 10px 30px;
+  line-height: 1.8;
+  position: relative;
+}
+.stone-detail li:before {
+  content: "0" counter(stone-events);
+  position: absolute;
+  left: 0;
+  font-size: 9px;
+  color: var(--stone-color);
+}
+.stone-thanos-link {
+  padding: 20px;
+  border-left: 1px solid var(--stone-color);
+  background: color-mix(in srgb, var(--stone-color), transparent 96%);
+  margin-bottom: 26px;
+}
+.stone-thanos-link p {
+  font-size: 12px;
+  color: #bab3c4;
+  line-height: 1.9;
+  margin: 10px 0 0;
+}
+.stone-appearances {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.stone-appearances span {
+  font-size: 9px;
+  padding: 7px 9px;
+  color: #a6a1b0;
+  border: 1px solid #ffffff16;
+}
+.infinity-epilogue {
+  border-block: 1px solid #ffffff16;
+  padding: 30px 0;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin-top: 45px;
+}
+.infinity-epilogue > span {
+  font-size: 9px;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  color: #bcae9a;
+}
+.infinity-epilogue > p {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #7f7a8c;
+  max-width: 580px;
+  margin: 0 auto 0 0;
+}
+.infinity-epilogue > svg {
+  color: #6e6473;
+  flex-shrink: 0;
+}
+@keyframes stone-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-6deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(4deg);
+  }
+}
+@media (min-width: 641px) and (max-width: 1100px) {
+  .desktop-nav {
+    gap: 18px;
+  }
+  .header-actions .sound-toggle span {
+    display: none;
+  }
+  .header-assemble {
+    display: none;
+  }
+  .network-layout {
+    gap: 25px;
+    grid-template-columns: 1.2fr 1fr;
+  }
+  .network-stage {
+    height: 520px;
+  }
+  .network-node {
+    width: 84px;
+  }
+  .network-node img {
+    width: 54px;
+    height: 54px;
+  }
+  .network-center img {
+    width: 78px;
+    height: 78px;
+  }
+  .infinity-layout {
+    gap: 30px;
+  }
+  .stone-universe {
+    height: 570px;
+  }
+  .threat-intel {
+    padding-left: 25px;
+  }
+  .team-formation {
+    height: 390px;
+  }
+}
+@media (max-width: 800px) {
+  .timeline-feature {
+    gap: 30px;
+    min-height: 560px;
+  }
+  .network-layout {
+    grid-template-columns: 1fr;
+  }
+  .network-stage {
+    height: 540px;
+    max-width: 650px;
+    width: 100%;
+    margin: auto;
+  }
+  .network-details {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    column-gap: 30px;
+  }
+  .network-details > .explorer-label,
+  .network-details > h3,
+  .network-details > p {
+    grid-column: 1;
+  }
+  .network-relationship-list {
+    grid-column: 2;
+    grid-row: 1/5;
+    margin-top: 0;
+    max-height: 260px;
+  }
+  .threat-feature {
+    grid-template-columns: 1fr 1.15fr;
+  }
+  .threat-portrait {
+    min-height: 650px;
+  }
+  .infinity-layout {
+    grid-template-columns: 1fr;
+  }
+  .stone-universe {
+    max-width: 630px;
+    width: 100%;
+    margin: auto;
+    height: 600px;
+  }
+  .stone-detail {
+    max-width: 630px;
+    width: 100%;
+    margin: auto;
+  }
+  .infinity-epilogue > span:last-child {
+    display: none;
+  }
+  .formation-copy > p {
+    max-width: 350px;
+  }
+}
+@media (max-width: 640px) {
+  .universe-chapters {
+    gap: 22px;
+    min-height: 85px;
+  }
+  .universe-chapters > span {
+    display: none;
+  }
+  .universe-chapters a {
+    font-size: 11px;
+    gap: 8px;
+  }
+  .timeline-topline {
+    font-size: 7px;
+    letter-spacing: 0.8px;
+    line-height: 1.7;
+  }
+  .phase-switcher {
+    grid-template-columns: repeat(6, minmax(94px, 1fr));
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #48434b transparent;
+  }
+  .phase-switcher button {
+    padding: 15px 8px;
+  }
+  .phase-switcher button span {
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+  .phase-switcher button small {
+    font-size: 8px;
+    line-height: 1.6;
+  }
+  .film-rail {
+    padding-block: 20px;
+  }
+  .film-rail button {
+    flex-basis: 154px;
+  }
+  .film-rail button strong {
+    font-size: 11px;
+  }
+  .timeline-feature {
+    grid-template-columns: 1fr;
+    margin-top: 18px;
+    gap: 50px;
+    min-height: 0;
+  }
+  .timeline-art {
+    max-width: 250px;
+  }
+  .timeline-art-index {
+    font-size: 80px;
+    bottom: -20px;
+    left: -15px;
+  }
+  .timeline-story h3 {
+    font-size: 43px;
+  }
+  .timeline-story > p {
+    font-size: 12px;
+  }
+  .timeline-bottom {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .timeline-bottom p {
+    order: 3;
+    flex-basis: 100%;
+    line-height: 1.8;
+    font-size: 9px;
+  }
+  .timeline-bottom > a {
+    font-size: 8px;
+  }
+  .explorer-tabs {
+    gap: 6px;
+  }
+  .explorer-tabs button {
+    padding: 10px 11px;
+    font-size: 8px;
+    letter-spacing: 0.5px;
+  }
+  .explorer-tabs .formation-replay {
+    margin-left: 0;
+    padding-inline: 10px;
+  }
+  .formation-copy {
+    display: block;
+    margin: 28px 0;
+  }
+  .formation-copy > p {
+    font-size: 11px;
+    max-width: none;
+    margin-top: 15px;
+  }
+  .team-formation {
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .team-formation > button {
+    height: 245px;
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+  }
+  .member-number {
+    left: 13px;
+    top: 13px;
+    font-size: 8px;
+  }
+  .member-caption {
+    left: 7px;
+    right: 7px;
+    bottom: 17px;
+    gap: 8px;
+  }
+  .member-caption strong {
+    font-size: 23px;
+  }
+  .member-caption small {
+    font-size: 6px;
+    letter-spacing: 0.3px;
+  }
+  .member-caption svg {
+    width: 14px;
+  }
+  .formation-baseline {
+    flex-direction: column;
+    gap: 10px;
+    font-size: 7px;
+    line-height: 1.7;
+  }
+  .connection-filters {
+    gap: 6px;
+  }
+  .connection-filters button {
+    padding: 9px 10px;
+    font-size: 9px;
+  }
+  .network-layout {
+    gap: 35px;
+    margin-top: 30px;
+  }
+  .network-stage {
+    height: 420px;
+  }
+  .network-node {
+    width: 78px;
+    gap: 6px;
+  }
+  .network-node img {
+    width: 46px;
+    height: 46px;
+    padding: 2px;
+  }
+  .network-node strong {
+    font-size: 8px;
+  }
+  .network-node small {
+    font-size: 6px;
+    letter-spacing: 0.3px;
+  }
+  .network-center {
+    width: 98px;
+  }
+  .network-center img {
+    width: 70px;
+    height: 70px;
+  }
+  .network-center strong {
+    font-size: 23px;
+  }
+  .network-coordinate,
+  .network-instruction {
+    font-size: 6px;
+    letter-spacing: 0.6px;
+  }
+  .network-details {
+    display: block;
+  }
+  .network-details h3 {
+    font-size: 37px;
+  }
+  .network-relationship-list {
+    max-height: 290px;
+    margin-top: 20px;
+  }
+  .network-roster {
+    gap: 9px;
+    margin-top: 28px;
+  }
+  .network-roster button {
+    flex-basis: 62px;
+  }
+  .threat-selector > button {
+    flex-basis: 155px;
+  }
+  .threat-feature {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .threat-portrait {
+    min-height: 410px;
+  }
+  .threat-image-shade {
+    background: linear-gradient(0deg, #100c15, transparent 80%);
+  }
+  .threat-portrait > div:last-child {
+    left: 20px;
+    bottom: 35px;
+  }
+  .threat-portrait h3 {
+    font-size: 70px;
+  }
+  .threat-portrait > div:last-child > span {
+    font-size: 8px;
+    letter-spacing: 2px;
+  }
+  .threat-intel {
+    padding: 15px 0 28px;
+  }
+  .threat-intel h4 {
+    font-size: 23px;
+  }
+  .threat-intel > p {
+    font-size: 12px;
+  }
+  .explorer-footnote {
+    font-size: 8px;
+  }
+  .stone-universe {
+    height: 450px;
+    width: calc(100% + 18px);
+    margin-left: -9px;
+  }
+  .stone-gem {
+    width: 31px;
+    height: 43px;
+  }
+  .stone-node {
+    width: 78px;
+    padding-top: 10px;
+  }
+  .stone-node strong {
+    font-size: 17px;
+    margin-top: 13px;
+    letter-spacing: 1px;
+  }
+  .stone-node small {
+    font-size: 6px;
+  }
+  .gem-halo {
+    width: 63px;
+    height: 63px;
+    top: 0;
+  }
+  .infinity-center strong {
+    font-size: 35px;
+    letter-spacing: 2px;
+  }
+  .infinity-center > span {
+    font-size: 6px;
+    letter-spacing: 1px;
+  }
+  .infinity-center small {
+    font-size: 6px;
+    letter-spacing: 0.5px;
+  }
+  .stone-detail h3 {
+    font-size: 52px;
+  }
+  .stone-power {
+    font-size: 13px;
+  }
+  .infinity-epilogue {
+    gap: 12px;
+    padding: 24px 0;
+    margin-top: 35px;
+  }
+  .infinity-epilogue > span {
+    font-size: 7px;
+    letter-spacing: 0.7px;
+  }
+  .infinity-epilogue > p {
+    font-size: 10px;
+  }
+  .infinity-epilogue > svg {
+    width: 16px;
+  }
+  .mobile-nav {
+    max-height: calc(100dvh - 80px);
+    overflow: auto;
+  }
+  .mobile-nav a {
+    padding-block: 17px;
+  }
+}
+@media (max-width: 360px) {
+  .team-formation {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .team-formation > button {
+    height: 260px;
+  }
+  .network-stage {
+    height: 390px;
+  }
+  .network-node {
+    width: 66px;
+  }
+  .network-node strong {
+    font-size: 7px;
+  }
+  .network-node img {
+    width: 41px;
+    height: 41px;
+  }
+  .network-center img {
+    width: 63px;
+    height: 63px;
+  }
+  .network-center strong {
+    font-size: 20px;
+  }
+  .stone-universe {
+    height: 400px;
+  }
+  .stone-node {
+    width: 67px;
+  }
+  .stone-node strong {
+    font-size: 15px;
+  }
+  .infinity-center strong {
+    font-size: 29px;
+  }
+  .infinity-center small {
+    font-size: 5px;
+  }
+  .explorer-tabs button {
+    font-size: 7px;
+    padding-inline: 8px;
+  }
+  .threat-portrait h3 {
+    font-size: 60px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stone-gem {
+    animation: none;
+  }
+  .team-formation > button,
+  .team-formation img,
+  .network-node img,
+  .stone-rays line,
+  .stone-node .gem-halo {
+    transition: none;
+  }
+}
