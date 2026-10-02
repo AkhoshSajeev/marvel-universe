@@ -96,7 +96,16 @@ const rows: [string, string, string, number, string, string[]][] = [
     "2015-05-01",
     2,
     "An artificial intelligence built to protect the world decides humanity must end.",
-    ["Iron Man", "Hulk", "Scarlet Witch", "Vision", "Hawkeye"],
+    [
+      "Iron Man",
+      "Captain America",
+      "Thor",
+      "Hulk",
+      "Black Widow",
+      "Hawkeye",
+      "Scarlet Witch",
+      "Vision",
+    ],
   ],
   [
     "ant-man",

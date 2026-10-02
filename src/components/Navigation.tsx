@@ -1,5 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { AudioLines, Menu, VolumeX, X, ArrowUpRight } from "lucide-react";
+import {
+  AudioLines,
+  Search,
+  Menu,
+  VolumeX,
+  X,
+  ArrowUpRight,
+} from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAmbientAudio } from "../hooks/useAmbientAudio";
 
@@ -13,7 +20,7 @@ export function Brand() {
   );
 }
 
-export function Navigation() {
+export function Navigation({ onSearch }: { onSearch: () => void }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuToggle = useRef<HTMLButtonElement>(null);
   const [active, setActive] = useState("overview");
@@ -22,6 +29,7 @@ export function Navigation() {
     { id: "overview", title: "Overview" },
     { id: "avengers", title: "The Avengers" },
     { id: "timeline", title: "Timeline" },
+    { id: "movies", title: "Movies" },
     { id: "saga", title: "The Saga" },
   ];
   useEffect(() => {
@@ -80,6 +88,18 @@ export function Navigation() {
       </nav>
       <div className="header-actions">
         <button
+          className="global-search-toggle"
+          onClick={() => {
+            setMenuOpen(false);
+            onSearch();
+          }}
+          aria-label="Search the universe"
+          title="Search the universe (⌘/Ctrl K)"
+        >
+          <Search size={17} />
+          <span>SEARCH</span>
+        </button>
+        <button
           className={`sound-toggle ${enabled ? "is-playing" : ""}`}
           onClick={() => void toggle()}
           aria-label={
@@ -130,13 +150,15 @@ export function Navigation() {
               { id: "connections", title: "Connections" },
               { id: "threats", title: "The threats" },
               { id: "infinity", title: "Infinity Stones" },
+              { id: "gauntlet", title: "The Gauntlet" },
+              { id: "compare", title: "Compare abilities" },
             ].map((link, index) => (
               <a
                 key={link.id}
                 href={`#${link.id}`}
                 onClick={() => setMenuOpen(false)}
               >
-                <span>0{index + 1}</span>
+                <span>{String(index + 1).padStart(2, "0")}</span>
                 {link.title}
                 <ArrowUpRight size={22} />
               </a>

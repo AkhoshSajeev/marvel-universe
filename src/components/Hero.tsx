@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { ArrowDown, ArrowUpRight, Orbit, Crosshair } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { rosterEntries } from "../data/catalog";
 import { usePointerLight } from "../hooks/usePointerLight";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -145,7 +146,7 @@ export function Hero() {
           ENTER THE UNIVERSE
         </a>
         <span>
-          18 CHARACTERS <i /> INFINITE POSSIBILITIES
+          {rosterEntries.length} CHARACTERS <i /> INFINITE POSSIBILITIES
         </span>
         <span className="cinema-signal">
           <i />

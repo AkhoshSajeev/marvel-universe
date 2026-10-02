@@ -3,6 +3,8 @@ import { createPortal } from "react-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import { X } from "lucide-react";
 
+let externalDialogOpener: HTMLElement | null = null;
+
 export function Modal({
   children,
   onClose,
@@ -18,6 +20,12 @@ export function Modal({
   const reducedMotion = useReducedMotion();
   useEffect(() => {
     const previous = document.activeElement as HTMLElement | null;
+    if (
+      previous &&
+      previous !== document.body &&
+      !previous.closest('[role="dialog"]')
+    )
+      externalDialogOpener = previous;
     const oldOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     content.current?.querySelector<HTMLButtonElement>(".modal-close")?.focus();
@@ -25,7 +33,7 @@ export function Modal({
       if (event.key === "Escape") onClose();
       if (event.key === "Tab") {
         const focusable = content.current?.querySelectorAll<HTMLElement>(
-          'a[href], button:not([disabled]), input, [tabindex="0"], iframe',
+          'a[href], button:not([disabled]), input, select, textarea, [tabindex="0"], iframe',
         );
         if (!focusable?.length) return;
         const first = focusable[0];
@@ -44,7 +52,13 @@ export function Modal({
     return () => {
       document.body.style.overflow = oldOverflow;
       document.removeEventListener("keydown", onKey);
-      previous?.focus();
+      if (
+        previous?.isConnected &&
+        previous !== document.body &&
+        !previous.closest('[role="dialog"]')
+      )
+        previous.focus();
+      else externalDialogOpener?.focus();
     };
   }, [onClose]);
   return createPortal(
@@ -71,7 +85,7 @@ export function Modal({
         }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: reducedMotion ? 0 : 15 }}
-        transition={{ duration: 0.25 }}
+        transition={{ duration: reducedMotion ? 0 : 0.35 }}
       >
         <button
           className="modal-close"

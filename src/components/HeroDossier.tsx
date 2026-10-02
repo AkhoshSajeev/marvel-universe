@@ -11,6 +11,7 @@ import {
 import { motion, useReducedMotion } from "framer-motion";
 import { heroes, type Hero } from "../data/universe";
 import { AbilityConstellation } from "./AbilityConstellation";
+import { DossierAtmosphere } from "./CinematicEffects";
 import { Modal } from "./Modal";
 
 const sections = ["Identity", "Abilities", "Equipment", "Story"] as const;
@@ -123,6 +124,7 @@ export function HeroDossier({
             transition={{ duration: reducedMotion ? 0 : 0.8 }}
           />
           <div className="experience-portrait-shade" />
+          <DossierAtmosphere id={hero.id} category={hero.category} />
           <div className="experience-portrait-grid" aria-hidden="true" />
           <div className="experience-file-label">
             <Crosshair size={17} aria-hidden="true" />

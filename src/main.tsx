@@ -5,6 +5,7 @@ import "./styles.css";
 import "./cinema.css";
 import "./dossier.css";
 import "./explorer.css";
+import "./interactive.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

@@ -375,6 +375,12 @@
       "source": "https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/92DE7AEDE1BF449FFEEBFC4ABC6141324A6BDDA275DA7407E44DCFE42D4AF46E/compose?format=webp&width=1600",
       "sourcePage": "https://www.disneyplus.com/explore/articles/avengers-doomsday",
       "description": "MCU film / promotional still; locally optimized JPEG."
+    },
+    {
+      "file": "images/wolverine.jpg",
+      "source": "https://lumiere-a.akamaihd.net/v1/images/deadpool_thumb_wv2_6628b0a4.jpeg?region=0%2C0%2C1000%2C1000",
+      "sourcePage": "https://marvel.disney.co.jp/movie/deadpool-and-wolverine/character/wolverine",
+      "description": "Official Marvel Japan Wolverine promotional character artwork, locally optimized."
     }
   ],
   "fonts": [

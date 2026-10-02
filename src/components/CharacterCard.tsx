@@ -21,11 +21,13 @@ export function CharacterCard({
       layout={!reduced}
       initial={{ opacity: 0, y: reduced ? 0 : 15 }}
       animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: reduced ? 1 : 0.96 }}
       transition={{ duration: reduced ? 0 : 0.4 }}
       style={{ "--character-color": hero.color } as CSSProperties}
     >
       <button
         className="character-portal"
+        data-cursor="EXPLORE"
         {...pointer}
         onClick={() => onSelect(hero)}
         aria-label={`Explore ${hero.name}, ${hero.alias}`}

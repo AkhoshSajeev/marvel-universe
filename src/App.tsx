@@ -13,18 +13,56 @@ import { Connections } from "./components/Connections";
 import { Threats } from "./components/Threats";
 import { InfinitySaga } from "./components/InfinitySaga";
 import { Saga } from "./components/Saga";
+import { GlobalSearch, ArchiveDialog } from "./components/GlobalSearch";
+import { AbilityComparison } from "./components/AbilityComparison";
+import { InfinityGauntlet } from "./components/InfinityGauntlet";
+import { MovieExplorer } from "./components/MovieExplorer";
+import { CinematicEffects } from "./components/CinematicEffects";
+import { type ArchiveRecord, catalogMovies } from "./data/catalog";
+import { heroes } from "./data/universe";
 import { MovieDialog } from "./components/MovieDialog";
 import { type Hero as HeroType, type Movie } from "./data/universe";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
-  const [selectedHero, setSelectedHero] = useState<HeroType | null>(null);
-  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+  const [overlay, setOverlay] = useState<
+    | { type: "hero"; hero: HeroType }
+    | { type: "movie"; movie: Movie }
+    | { type: "search" }
+    | { type: "record"; record: ArchiveRecord }
+    | null
+  >(null);
   const [timelineFilm, setTimelineFilm] = useState("avengers");
   const root = useRef<HTMLDivElement>(null);
-  const closeHero = useCallback(() => setSelectedHero(null), []);
-  const closeMovie = useCallback(() => setSelectedMovie(null), []);
+  const closeOverlay = useCallback(() => setOverlay(null), []);
+  const setSelectedHero = useCallback(
+    (hero: HeroType) => setOverlay({ type: "hero", hero }),
+    [],
+  );
+  const setSelectedMovie = useCallback(
+    (movie: Movie) => setOverlay({ type: "movie", movie }),
+    [],
+  );
+  const openSearch = useCallback(() => setOverlay({ type: "search" }), []);
+  const openRecord = (record: ArchiveRecord) => {
+    if (record.heroId)
+      setSelectedHero(heroes.find((h) => h.id === record.heroId)!);
+    else if (record.movieId)
+      setSelectedMovie(catalogMovies.find((m) => m.id === record.movieId)!);
+    else setOverlay({ type: "record", record });
+  };
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        if (!overlay) openSearch();
+        else if (overlay.type === "search") closeOverlay();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [overlay, openSearch, closeOverlay]);
   useEffect(() => {
     const media = gsap.matchMedia();
     media.add("(prefers-reduced-motion: no-preference)", () => {
@@ -58,18 +96,14 @@ export default function App() {
   }, []);
   return (
     <MotionConfig reducedMotion="user">
-      <div
-        ref={root}
-        className="app-shell"
-        inert={selectedHero !== null || selectedMovie !== null}
-      >
+      <div ref={root} className="app-shell" inert={overlay !== null}>
         <a className="skip-link" href="#avengers">
           Skip to the Avengers
         </a>
-        <Navigation />
+        <Navigation onSearch={openSearch} />
         <main>
           <Hero />
-          <Avengers onSelect={setSelectedHero} />
+          <Avengers onSelect={setSelectedHero} onRecord={openRecord} />
           <nav
             className="universe-chapters page-gutter"
             aria-label="Explore the universe"
@@ -81,6 +115,9 @@ export default function App() {
               ["connections", "Connections"],
               ["threats", "The threats"],
               ["infinity", "Infinity Stones"],
+              ["gauntlet", "Gauntlet"],
+              ["compare", "Compare"],
+              ["movies", "Movies"],
             ].map(([id, label], i) => (
               <a key={id} href={`#${id}`}>
                 <small>0{i + 1}</small>
@@ -111,6 +148,9 @@ export default function App() {
             }}
           />
           <InfinitySaga />
+          <InfinityGauntlet />
+          <AbilityComparison onSelect={setSelectedHero} />
+          <MovieExplorer onSelect={setSelectedMovie} />
           <Saga onSelect={setSelectedMovie} />
         </main>
         <footer className="site-footer page-gutter">
@@ -139,23 +179,52 @@ export default function App() {
             </a>
           </div>
         </footer>
-        <AnimatePresence>
-          {selectedHero && (
+        <AnimatePresence mode="wait">
+          {overlay?.type === "hero" && (
             <HeroDossier
-              hero={selectedHero}
-              onClose={closeHero}
+              key="hero-dossier"
+              hero={overlay.hero}
+              onClose={closeOverlay}
               onSelect={setSelectedHero}
             />
           )}
-          {selectedMovie && (
+          {overlay?.type === "movie" && (
             <MovieDialog
-              key={selectedMovie.id}
-              movie={selectedMovie}
-              onClose={closeMovie}
+              key={`movie-${overlay.movie.id}`}
+              movie={overlay.movie}
+              onClose={closeOverlay}
+              onMovie={setSelectedMovie}
+              onHero={setSelectedHero}
+            />
+          )}
+          {overlay?.type === "search" && (
+            <GlobalSearch
+              key="global-search"
+              onClose={closeOverlay}
+              onSelect={openRecord}
+            />
+          )}
+          {overlay?.type === "record" && (
+            <ArchiveDialog
+              key={`record-${overlay.record.id}`}
+              record={overlay.record}
+              onClose={closeOverlay}
+              onHero={setSelectedHero}
+              onMovie={setSelectedMovie}
+              onSection={(id) => {
+                closeOverlay();
+                requestAnimationFrame(() => {
+                  window.location.hash = id;
+                  document
+                    .getElementById(id)
+                    ?.scrollIntoView({ behavior: "instant" });
+                });
+              }}
             />
           )}
         </AnimatePresence>
       </div>
+      <CinematicEffects />
     </MotionConfig>
   );
 }

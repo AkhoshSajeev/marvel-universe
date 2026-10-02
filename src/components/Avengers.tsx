@@ -2,42 +2,38 @@ import { useLayoutEffect, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Search, Shield, X, SlidersHorizontal } from "lucide-react";
 import { heroes, universeFacts, type Hero } from "../data/universe";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import {
+  rosterEntries,
+  characterFilters,
+  type CharacterFilter,
+  type ArchiveRecord,
+} from "../data/catalog";
 import { CharacterCard } from "./CharacterCard";
 
-const filters = [
-  { id: "all", label: "ALL CHARACTERS" },
-  { id: "original", label: "ORIGINAL SIX" },
-  { id: "tech", label: "TECH & TACTICS" },
-  { id: "enhanced", label: "ENHANCED" },
-  { id: "mystic", label: "MYSTIC" },
-  { id: "cosmic", label: "COSMIC" },
-] as const;
-function matchesFilter(hero: Hero, filter: string) {
-  if (filter === "all") return true;
-  if (filter === "original")
-    return heroes.slice(0, 6).some((original) => original.id === hero.id);
-  if (filter === "tech")
-    return hero.category === "tech" || hero.category === "tactical";
-  return hero.category === filter;
-}
-export function Avengers({ onSelect }: { onSelect: (hero: Hero) => void }) {
-  const [filter, setFilter] = useState("all");
+export function Avengers({
+  onSelect,
+  onRecord,
+}: {
+  onSelect: (hero: Hero) => void;
+  onRecord: (record: ArchiveRecord) => void;
+}) {
+  const [filter, setFilter] = useState<CharacterFilter>("ALL");
   const [query, setQuery] = useState("");
   const search = query.trim().toLowerCase();
+  const reduced = useReducedMotion();
   useLayoutEffect(() => {
     ScrollTrigger.refresh();
   }, [filter, query]);
-  const shown = heroes.filter(
-    (hero) =>
-      matchesFilter(hero, filter) &&
+  const matches = (
+    entry: (typeof rosterEntries)[number],
+    selected: CharacterFilter,
+  ) => selected === "ALL" || entry.tags.includes(selected);
+  const shown = rosterEntries.filter(
+    (entry) =>
+      matches(entry, filter) &&
       (!search ||
-        [
-          hero.name,
-          hero.alias,
-          hero.affiliation,
-          ...hero.abilities.map((ability) => ability.label),
-        ]
-          .join(" ")
+        `${entry.record.title} ${entry.record.subtitle} ${entry.record.keywords}`
           .toLowerCase()
           .includes(search)),
   );
@@ -71,17 +67,17 @@ export function Avengers({ onSelect }: { onSelect: (hero: Hero) => void }) {
       </div>
       <div className="character-controls page-gutter">
         <div className="character-filters" aria-label="Filter characters">
-          {filters.map((item) => (
+          {characterFilters.map((item) => (
             <button
-              key={item.id}
-              onClick={() => setFilter(item.id)}
-              aria-pressed={filter === item.id}
-              className={filter === item.id ? "selected" : ""}
+              key={item}
+              onClick={() => setFilter(item)}
+              aria-pressed={filter === item}
+              className={filter === item ? "selected" : ""}
             >
-              {item.label}
+              {item}
               <span>
                 {String(
-                  heroes.filter((hero) => matchesFilter(hero, item.id)).length,
+                  rosterEntries.filter((entry) => matches(entry, item)).length,
                 ).padStart(2, "0")}
               </span>
             </button>
@@ -91,7 +87,7 @@ export function Avengers({ onSelect }: { onSelect: (hero: Hero) => void }) {
           <Search size={15} />
           <input
             type="search"
-            placeholder="Find your hero…"
+            placeholder="Find a character…"
             aria-label="Search characters"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
@@ -106,6 +102,11 @@ export function Avengers({ onSelect }: { onSelect: (hero: Hero) => void }) {
           )}
         </label>
       </div>
+      <p className="roster-scope page-gutter">
+        Categories reflect these MCU snapshots. Loki spans ally and antagonist
+        roles; Wolverine is a multiversal guest. Open a file for its story
+        scope.
+      </p>
       <div className="character-results page-gutter">
         <span role="status" aria-live="polite">
           {String(shown.length).padStart(2, "0")} CHARACTERS DISCOVERED
@@ -115,14 +116,55 @@ export function Avengers({ onSelect }: { onSelect: (hero: Hero) => void }) {
         </span>
       </div>
       <div className="character-grid page-gutter">
-        {shown.map((hero) => (
-          <CharacterCard
-            key={hero.id}
-            hero={hero}
-            index={heroes.indexOf(hero)}
-            onSelect={onSelect}
-          />
-        ))}
+        <AnimatePresence>
+          {shown.map((entry) => {
+            const hero = heroes.find((h) => h.id === entry.id);
+            return hero ? (
+              <CharacterCard
+                key={entry.id}
+                hero={hero}
+                index={heroes.indexOf(hero)}
+                onSelect={onSelect}
+              />
+            ) : (
+              <motion.article
+                className="character-entry archive-entry"
+                key={entry.id}
+                layout={!reduced}
+                initial={{ opacity: 0, y: reduced ? 0 : 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: reduced ? 1 : 0.96 }}
+                transition={{ duration: reduced ? 0 : 0.3 }}
+              >
+                <button
+                  className="archive-portal"
+                  data-cursor="EXPLORE"
+                  onClick={() => onRecord(entry.record)}
+                  aria-label={`Explore ${entry.record.title} archive file`}
+                >
+                  <img
+                    src={entry.record.image}
+                    alt={entry.record.title}
+                    loading="lazy"
+                    width="600"
+                    height="900"
+                  />
+                  <span className="archive-card-shade" />
+                  <span className="archive-card-type">
+                    {entry.record.category === "Villains"
+                      ? "THREAT FILE"
+                      : "MULTIVERSAL GUEST"}
+                  </span>
+                  <span className="archive-card-caption">
+                    <small>{entry.record.subtitle}</small>
+                    <strong>{entry.record.title}</strong>
+                    <span>OPEN ARCHIVE FILE ↗</span>
+                  </span>
+                </button>
+              </motion.article>
+            );
+          })}
+        </AnimatePresence>
       </div>
       {shown.length === 0 && (
         <div className="character-empty page-gutter">
@@ -133,7 +175,7 @@ export function Avengers({ onSelect }: { onSelect: (hero: Hero) => void }) {
             className="button button-red"
             onClick={() => {
               setQuery("");
-              setFilter("all");
+              setFilter("ALL");
             }}
           >
             RESET FILTERS
