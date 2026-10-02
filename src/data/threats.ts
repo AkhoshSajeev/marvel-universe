@@ -1,3 +1,4 @@
+import { imageAsset } from "../assets/registry";
 export interface Threat {
   id: string;
   name: string;
@@ -13,8 +14,7 @@ export interface Threat {
   filmId?: string;
   upcoming?: boolean;
 }
-const image = (id: string) =>
-  `${import.meta.env.BASE_URL}images/threat-${id}.jpg`;
+const image = (id: string) => imageAsset(`threat-${id}`);
 export const threats: Threat[] = [
   {
     id: "thanos",
@@ -37,7 +37,7 @@ export const threats: Threat[] = [
     name: "Loki",
     alias: "THE GOD OF MISCHIEF",
     color: "#7dcc9a",
-    image: `${import.meta.env.BASE_URL}images/loki.jpg`,
+    image: imageAsset("loki"),
     scope: "THE AVENGERS · 2012",
     motivation:
       "Claim a throne and prove his superiority by subjugating Earth.",

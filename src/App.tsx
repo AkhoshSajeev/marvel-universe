@@ -1,35 +1,74 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useExperience } from "./hooks/useExperience";
+import {
+  lazy,
+  Suspense,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { AnimatePresence, MotionConfig } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowUpRight, Heart, ArrowUp } from "lucide-react";
-import { Navigation, Brand } from "./components/Navigation";
+import { ArrowUpRight } from "lucide-react";
+import { Navigation } from "./components/Navigation";
 import { Hero } from "./components/Hero";
 import { Avengers } from "./components/Avengers";
-import { HeroDossier } from "./components/HeroDossier";
+
 import { MCUTimeline } from "./components/MCUTimeline";
 import { TeamFormation } from "./components/TeamFormation";
 import { Connections } from "./components/Connections";
 import { Threats } from "./components/Threats";
 import { InfinitySaga } from "./components/InfinitySaga";
 import { Saga } from "./components/Saga";
-import { GlobalSearch, ArchiveDialog } from "./components/GlobalSearch";
+
 import { AbilityComparison } from "./components/AbilityComparison";
 import { InfinityGauntlet } from "./components/InfinityGauntlet";
 import { MovieExplorer } from "./components/MovieExplorer";
 import { CinematicEffects } from "./components/CinematicEffects";
 import { type ArchiveRecord, catalogMovies } from "./data/catalog";
 import { heroes } from "./data/universe";
-import { MovieDialog } from "./components/MovieDialog";
+
 import { type Hero as HeroType, type Movie } from "./data/universe";
+
+import { Footer } from "./components/Footer";
+import { Modal } from "./components/Modal";
+import { useEasterEgg } from "./hooks/useEasterEgg";
+const HeroDossier = lazy(() =>
+  import("./components/HeroDossier").then((module) => ({
+    default: module.HeroDossier,
+  })),
+);
+const GlobalSearch = lazy(() =>
+  import("./components/GlobalSearch").then((module) => ({
+    default: module.GlobalSearch,
+  })),
+);
+const ArchiveDialog = lazy(() =>
+  import("./components/GlobalSearch").then((module) => ({
+    default: module.ArchiveDialog,
+  })),
+);
+const MovieDialog = lazy(() =>
+  import("./components/MovieDialog").then((module) => ({
+    default: module.MovieDialog,
+  })),
+);
+const ClassifiedArchive = lazy(() =>
+  import("./components/ClassifiedArchive").then((module) => ({
+    default: module.ClassifiedArchive,
+  })),
+);
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
+  const { reduced, economy } = useExperience();
   const [overlay, setOverlay] = useState<
     | { type: "hero"; hero: HeroType }
     | { type: "movie"; movie: Movie }
     | { type: "search" }
+    | { type: "classified" }
     | { type: "record"; record: ArchiveRecord }
     | null
   >(null);
@@ -45,6 +84,11 @@ export default function App() {
     [],
   );
   const openSearch = useCallback(() => setOverlay({ type: "search" }), []);
+  const unlockArchive = useCallback(
+    () => setOverlay({ type: "classified" }),
+    [],
+  );
+  useEasterEgg(unlockArchive, overlay !== null);
   const openRecord = (record: ArchiveRecord) => {
     if (record.heroId)
       setSelectedHero(heroes.find((h) => h.id === record.heroId)!);
@@ -64,6 +108,7 @@ export default function App() {
     return () => document.removeEventListener("keydown", onKey);
   }, [overlay, openSearch, closeOverlay]);
   useEffect(() => {
+    if (reduced || economy) return;
     const media = gsap.matchMedia();
     media.add("(prefers-reduced-motion: no-preference)", () => {
       const ctx = gsap.context(() => {
@@ -93,9 +138,9 @@ export default function App() {
       };
     });
     return () => media.revert();
-  }, []);
+  }, [reduced, economy]);
   return (
-    <MotionConfig reducedMotion="user">
+    <MotionConfig reducedMotion={reduced || economy ? "always" : "user"}>
       <div ref={root} className="app-shell" inert={overlay !== null}>
         <a className="skip-link" href="#avengers">
           Skip to the Avengers
@@ -140,10 +185,7 @@ export default function App() {
               setTimelineFilm(id);
               window.location.hash = "timeline";
               document.getElementById("timeline")?.scrollIntoView({
-                behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
-                  .matches
-                  ? "instant"
-                  : "smooth",
+                behavior: reduced || economy ? "instant" : "smooth",
               });
             }}
           />
@@ -153,76 +195,71 @@ export default function App() {
           <MovieExplorer onSelect={setSelectedMovie} />
           <Saga onSelect={setSelectedMovie} />
         </main>
-        <footer className="site-footer page-gutter">
-          <div className="footer-top">
-            <a href="#overview" aria-label="Return to Marvel Universe home">
-              <Brand />
-            </a>
-            <p>
-              For the heroes.
-              <br />
-              <span>For the stories that stay with us.</span>
-            </p>
-            <a className="back-to-top" href="#overview">
-              BACK TO TOP <ArrowUp size={16} />
-            </a>
-          </div>
-          <div className="footer-bottom">
-            <span>
-              An independent fan experience. Characters and artwork © Marvel.
-            </span>
-            <span>
-              BUILT WITH <Heart size={11} /> FOR THE UNIVERSE
-            </span>
-            <a href="https://www.marvel.com/" target="_blank" rel="noreferrer">
-              OFFICIAL MARVEL <ArrowUpRight size={12} />
-            </a>
-          </div>
-        </footer>
-        <AnimatePresence mode="wait">
-          {overlay?.type === "hero" && (
-            <HeroDossier
-              key="hero-dossier"
-              hero={overlay.hero}
+        <Footer onUnlock={unlockArchive} />
+        <Suspense
+          fallback={
+            <Modal
               onClose={closeOverlay}
-              onSelect={setSelectedHero}
-            />
-          )}
-          {overlay?.type === "movie" && (
-            <MovieDialog
-              key={`movie-${overlay.movie.id}`}
-              movie={overlay.movie}
-              onClose={closeOverlay}
-              onMovie={setSelectedMovie}
-              onHero={setSelectedHero}
-            />
-          )}
-          {overlay?.type === "search" && (
-            <GlobalSearch
-              key="global-search"
-              onClose={closeOverlay}
-              onSelect={openRecord}
-            />
-          )}
-          {overlay?.type === "record" && (
-            <ArchiveDialog
-              key={`record-${overlay.record.id}`}
-              record={overlay.record}
-              onClose={closeOverlay}
-              onHero={setSelectedHero}
-              onMovie={setSelectedMovie}
-              onSection={(id) => {
-                closeOverlay();
-                requestAnimationFrame(() => {
-                  window.location.hash = id;
-                  document
-                    .getElementById(id)
-                    ?.scrollIntoView({ behavior: "instant" });
-                });
-              }}
-            />
-          )}
-        </AnimatePresence>
+              labelId="loading-title"
+              className="archive-loading"
+            >
+              <span className="explorer-label">S.H.I.E.L.D. ARCHIVE</span>
+              <h2 id="loading-title">ACCESSING DATABASE...</h2>
+            </Modal>
+          }
+        >
+          <AnimatePresence mode="wait">
+            {overlay?.type === "hero" && (
+              <HeroDossier
+                key="hero-dossier"
+                hero={overlay.hero}
+                onClose={closeOverlay}
+                onSelect={setSelectedHero}
+              />
+            )}
+            {overlay?.type === "movie" && (
+              <MovieDialog
+                key={`movie-${overlay.movie.id}`}
+                movie={overlay.movie}
+                onClose={closeOverlay}
+                onMovie={setSelectedMovie}
+                onHero={setSelectedHero}
+              />
+            )}
+            {overlay?.type === "search" && (
+              <GlobalSearch
+                key="global-search"
+                onClose={closeOverlay}
+                onSelect={openRecord}
+              />
+            )}
+            {overlay?.type === "record" && (
+              <ArchiveDialog
+                key={`record-${overlay.record.id}`}
+                record={overlay.record}
+                onClose={closeOverlay}
+                onHero={setSelectedHero}
+                onMovie={setSelectedMovie}
+                onSection={(id) => {
+                  closeOverlay();
+                  requestAnimationFrame(() => {
+                    window.location.hash = id;
+                    document
+                      .getElementById(id)
+                      ?.scrollIntoView({ behavior: "instant" });
+                  });
+                }}
+              />
+            )}
+            {overlay?.type === "classified" && (
+              <ClassifiedArchive
+                key="classified"
+                onClose={closeOverlay}
+                onHero={setSelectedHero}
+              />
+            )}
+          </AnimatePresence>
+        </Suspense>
       </div>
       <CinematicEffects />
     </MotionConfig>

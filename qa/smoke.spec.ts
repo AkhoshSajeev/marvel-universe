@@ -35,7 +35,10 @@ test("the cinematic entry point and all eighteen portraits load under the Pages 
         ),
       )
       .toBe(true);
-    await expect(image).toHaveAttribute("src", /^\/marvel-universe\/images\//);
+    await expect(image).toHaveAttribute(
+      "src",
+      /^\/marvel-universe\/assets\/optimized\//,
+    );
   }
   await page.evaluate(() => document.fonts.ready);
   expect(
@@ -94,6 +97,7 @@ test("full-screen dossiers trap focus, isolate the page, and restore the opener"
   await expect(close).toBeFocused();
   await expect(page.locator("body")).toHaveCSS("overflow", "hidden");
   await expect(page.locator(".app-shell")).toHaveAttribute("inert", "");
+  await expect(page.getByRole("dialog")).toHaveAccessibleName("Iron Man");
   const bounds = await page.getByRole("dialog").boundingBox();
   expect(bounds?.width).toBeCloseTo(1440, 0);
   expect(bounds?.height).toBeCloseTo(1000, 0);
@@ -253,18 +257,18 @@ test("mobile navigation restores focus and closes on navigation or desktop resiz
   await page.goto("./");
   await page.getByRole("button", { name: "Open navigation menu" }).click();
   const menu = page.getByRole("navigation", { name: "Mobile navigation" });
-  await menu.getByRole("link", { name: "The Avengers" }).focus();
+  await menu.getByRole("link", { name: /HEROES/ }).focus();
   await page.keyboard.press("Escape");
   await expect(menu).toHaveCount(0);
   await expect(
     page.getByRole("button", { name: "Open navigation menu" }),
   ).toBeFocused();
   await page.getByRole("button", { name: "Open navigation menu" }).click();
-  await menu.getByRole("link", { name: "The Saga" }).click();
+  await menu.getByRole("link", { name: /INFINITY SAGA/ }).click();
   await expect(menu).toHaveCount(0);
-  await expect(page).toHaveURL(/#saga$/);
+  await expect(page).toHaveURL(/#infinity$/);
   await page.getByRole("button", { name: "Open navigation menu" }).click();
-  await page.setViewportSize({ width: 900, height: 1000 });
+  await page.setViewportSize({ width: 1440, height: 1000 });
   await expect(menu).toHaveCount(0);
 });
 
@@ -276,6 +280,7 @@ test("mobile full-screen character sections stay inside the viewport and close f
   await page.goto("./");
   await page.getByRole("button", { name: ironMan }).click();
   const dialog = page.getByRole("dialog");
+  await expect(dialog).toHaveAccessibleName("Iron Man");
   const bounds = await dialog.boundingBox();
   expect(bounds?.width).toBeCloseTo(390, 0);
   expect(bounds?.height).toBeCloseTo(844, 0);

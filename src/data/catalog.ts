@@ -1,3 +1,4 @@
+import { imageAsset } from "../assets/registry";
 import { heroes, movies, type Movie } from "./universe";
 import { timelineFilms } from "./timeline";
 import { threats } from "./threats";
@@ -76,7 +77,7 @@ export const wolverine: ArchiveRecord = {
     "An alternate Wolverine joins Deadpool in Deadpool & Wolverine (2024). His regenerative healing, heightened senses and adamantium claws make him a formidable close-quarters fighter. This guest file covers the 2024 film variant; it does not treat him as a member of the original Avengers.",
   keywords:
     "Logan James Howlett mutant X-Men regeneration healing adamantium claws Hugh Jackman",
-  image: `${import.meta.env.BASE_URL}images/wolverine.jpg`,
+  image: imageAsset("wolverine"),
   relatedFilms: ["deadpool-wolverine"],
 };
 const locations: ArchiveRecord[] = [

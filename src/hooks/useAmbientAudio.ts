@@ -41,6 +41,38 @@ export function useAmbientAudio() {
     }
   }, [enabled]);
   useEffect(() => {
+    if (!enabled) return;
+    const click = (event: MouseEvent) => {
+      if (
+        document.hidden ||
+        !(event.target as Element).closest("button,a") ||
+        (event.target as Element).closest(".sound-toggle")
+      )
+        return;
+      const context = audio.current?.context;
+      if (!context || context.state !== "running") return;
+      const tone = context.createOscillator();
+      const level = context.createGain();
+      const now = context.currentTime;
+      tone.type = "sine";
+      tone.frequency.setValueAtTime(520, now);
+      tone.frequency.exponentialRampToValueAtTime(310, now + 0.07);
+      level.gain.setValueAtTime(0, now);
+      level.gain.linearRampToValueAtTime(0.016, now + 0.006);
+      level.gain.exponentialRampToValueAtTime(0.0001, now + 0.085);
+      tone.connect(level);
+      level.connect(context.destination);
+      tone.start(now);
+      tone.stop(now + 0.09);
+      tone.onended = () => {
+        tone.disconnect();
+        level.disconnect();
+      };
+    };
+    document.addEventListener("click", click);
+    return () => document.removeEventListener("click", click);
+  }, [enabled]);
+  useEffect(() => {
     const handleVisibility = () => {
       if (document.hidden && audio.current) {
         audio.current.gain.gain.setTargetAtTime(

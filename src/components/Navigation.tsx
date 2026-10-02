@@ -6,10 +6,12 @@ import {
   VolumeX,
   X,
   ArrowUpRight,
+  Accessibility,
 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAmbientAudio } from "../hooks/useAmbientAudio";
-
+import { useExperience } from "../hooks/useExperience";
+import { primaryNavigation, extraNavigation } from "../data/navigation";
 export function Brand() {
   return (
     <span className="brand">
@@ -19,53 +21,95 @@ export function Brand() {
     </span>
   );
 }
-
 export function Navigation({ onSearch }: { onSearch: () => void }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const menuToggle = useRef<HTMLButtonElement>(null);
+  const [compact, setCompact] = useState(false);
   const [active, setActive] = useState("overview");
+  const menuToggle = useRef<HTMLButtonElement>(null);
+  const header = useRef<HTMLElement>(null);
   const { enabled, available, toggle } = useAmbientAudio();
-  const links = [
-    { id: "overview", title: "Overview" },
-    { id: "avengers", title: "The Avengers" },
-    { id: "timeline", title: "Timeline" },
-    { id: "movies", title: "Movies" },
-    { id: "saga", title: "The Saga" },
-  ];
+  const { reduced, manualReduced, toggleMotion } = useExperience();
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(e.target.id);
         });
       },
       { rootMargin: "-15% 0px -65% 0px" },
     );
     document
       .querySelectorAll("main > section[id]")
-      .forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+      .forEach((s) => observer.observe(s));
+    const onScroll = () =>
+      setCompact((old) => {
+        const next = scrollY > 70;
+        return old === next ? old : next;
+      });
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
   useEffect(() => {
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && menuOpen) {
+    if (!menuOpen) return;
+    const oldOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const surfaces = Array.from(
+      document.querySelectorAll<HTMLElement>("main,footer"),
+    );
+    const previous = surfaces.map((e) => e.inert);
+    surfaces.forEach((e) => (e.inert = true));
+    const frame = requestAnimationFrame(() =>
+      header.current
+        ?.querySelector<HTMLAnchorElement>(".mobile-nav a")
+        ?.focus(),
+    );
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
         setMenuOpen(false);
         menuToggle.current?.focus();
       }
+      if (e.key === "Tab") {
+        const items = Array.from(
+          header.current?.querySelectorAll<HTMLElement>(
+            "a,button:not([disabled])",
+          ) ?? [],
+        ).filter((el) => el.getClientRects().length);
+        const first = items[0],
+          last = items.at(-1);
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
     };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      cancelAnimationFrame(frame);
+      document.body.style.overflow = oldOverflow;
+      surfaces.forEach((e, i) => (e.inert = previous[i]));
+      document.removeEventListener("keydown", onKey);
+    };
   }, [menuOpen]);
   useEffect(() => {
-    const desktop = window.matchMedia("(min-width: 641px)");
-    const onResize = () => {
+    const desktop = matchMedia("(min-width: 1200px)");
+    const resize = () => {
       if (desktop.matches) setMenuOpen(false);
     };
-    desktop.addEventListener("change", onResize);
-    return () => desktop.removeEventListener("change", onResize);
+    desktop.addEventListener("change", resize);
+    return () => desktop.removeEventListener("change", resize);
   }, []);
   return (
-    <header className="site-header">
+    <header
+      ref={header}
+      className={`site-header floating-nav ${compact ? "nav-compact" : ""} ${menuOpen ? "nav-open" : ""}`}
+    >
       <a
         className="brand-link"
         href="#overview"
@@ -75,7 +119,7 @@ export function Navigation({ onSearch }: { onSearch: () => void }) {
         <Brand />
       </a>
       <nav className="desktop-nav" aria-label="Main navigation">
-        {links.map((link) => (
+        {primaryNavigation.map((link) => (
           <a
             key={link.id}
             href={`#${link.id}`}
@@ -97,7 +141,21 @@ export function Navigation({ onSearch }: { onSearch: () => void }) {
           title="Search the universe (⌘/Ctrl K)"
         >
           <Search size={17} />
-          <span>SEARCH</span>
+        </button>
+        <button
+          className="motion-toggle"
+          onClick={toggleMotion}
+          aria-pressed={manualReduced}
+          aria-label={
+            manualReduced ? "Use device motion preference" : "Reduce motion"
+          }
+          title={
+            manualReduced
+              ? "Reduced motion is on. Use device preference."
+              : "Reduce motion"
+          }
+        >
+          <Accessibility size={17} />
         </button>
         <button
           className={`sound-toggle ${enabled ? "is-playing" : ""}`}
@@ -108,30 +166,25 @@ export function Navigation({ onSearch }: { onSearch: () => void }) {
           aria-pressed={enabled}
           disabled={!available}
           title={
-            available
-              ? "Toggle ambient sound"
-              : "Audio is unavailable in this browser"
+            enabled
+              ? "Sound on · mute"
+              : "Sound off · enable original ambient audio"
           }
         >
           {enabled ? <AudioLines size={17} /> : <VolumeX size={17} />}
-          <span>
-            {available ? (enabled ? "SOUND ON" : "SOUND OFF") : "NO AUDIO"}
-          </span>
+          <span>{enabled ? "ON" : "OFF"}</span>
         </button>
-        <a className="header-assemble" href="#avengers">
-          ASSEMBLE <ArrowUpRight size={14} />
-        </a>
         <button
           ref={menuToggle}
           className="menu-toggle"
-          onClick={() => setMenuOpen(!menuOpen)}
+          onClick={() => setMenuOpen((v) => !v)}
           aria-label={
             menuOpen ? "Close navigation menu" : "Open navigation menu"
           }
           aria-expanded={menuOpen}
           aria-controls="mobile-navigation"
         >
-          {menuOpen ? <X /> : <Menu />}
+          {menuOpen ? <X size={21} /> : <Menu size={21} />}
         </button>
       </div>
       <AnimatePresence>
@@ -140,28 +193,34 @@ export function Navigation({ onSearch }: { onSearch: () => void }) {
             id="mobile-navigation"
             className="mobile-nav"
             aria-label="Mobile navigation"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
+            initial={{
+              opacity: 0,
+              clipPath: reduced ? "none" : "inset(0 0 100% 0)",
+            }}
+            animate={{ opacity: 1, clipPath: "inset(0 0 0% 0)" }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: reduced ? 0 : 0.3 }}
           >
-            {[
-              ...links,
-              { id: "teams", title: "Team lineups" },
-              { id: "connections", title: "Connections" },
-              { id: "threats", title: "The threats" },
-              { id: "infinity", title: "Infinity Stones" },
-              { id: "gauntlet", title: "The Gauntlet" },
-              { id: "compare", title: "Compare abilities" },
-            ].map((link, index) => (
-              <a
+            <div className="nav-database">
+              <i className="hud-live" /> AVENGERS DATABASE{" "}
+              <span>SYSTEM ONLINE</span>
+            </div>
+            {[...primaryNavigation, ...extraNavigation].map((link, i) => (
+              <motion.a
                 key={link.id}
                 href={`#${link.id}`}
                 onClick={() => setMenuOpen(false)}
+                initial={{ opacity: 0, x: reduced ? 0 : -12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{
+                  duration: reduced ? 0 : 0.25,
+                  delay: reduced ? 0 : i * 0.025,
+                }}
               >
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{String(i + 1).padStart(2, "0")}</span>
                 {link.title}
-                <ArrowUpRight size={22} />
-              </a>
+                <ArrowUpRight size={18} />
+              </motion.a>
             ))}
           </motion.nav>
         )}

@@ -1,3 +1,4 @@
+import { AssetImage } from "./AssetImage";
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import {
@@ -96,7 +97,7 @@ export function MCUTimeline({
           transition={{ duration: 0.35 }}
         >
           <div className="timeline-art">
-            <img
+            <AssetImage
               src={film.image}
               alt={`${film.title} theatrical poster`}
               width="600"

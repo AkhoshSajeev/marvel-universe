@@ -1,5 +1,7 @@
+import { useQuietMotion } from "../hooks/useExperience";
+import { AssetImage } from "./AssetImage";
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Search, Command, CornerDownLeft } from "lucide-react";
 import {
   searchArchive,
@@ -22,7 +24,7 @@ export function GlobalSearch({
   const [category, setCategory] = useState<SearchCategory | "All">("All");
   const [active, setActive] = useState(0);
   const input = useRef<HTMLInputElement>(null);
-  const reduced = useReducedMotion();
+  const reduced = useQuietMotion();
   const results = searchArchive(query, category);
   const shown = results.slice(0, 60);
   useEffect(() => {
@@ -128,7 +130,7 @@ export function GlobalSearch({
                 className="global-result"
               >
                 {r.image ? (
-                  <img src={r.image} alt="" loading="lazy" />
+                  <AssetImage src={r.image} alt="" loading="lazy" />
                 ) : (
                   <span className="search-record-mark">
                     {r.category.slice(0, 2).toUpperCase()}
@@ -191,7 +193,7 @@ export function ArchiveDialog({
     >
       {record.image && (
         <div className="archive-record-art">
-          <img src={record.image} alt={record.title} />
+          <AssetImage src={record.image} alt={record.title} />
         </div>
       )}
       <div className="archive-record-copy">

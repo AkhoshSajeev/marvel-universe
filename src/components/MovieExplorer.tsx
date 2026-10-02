@@ -1,5 +1,7 @@
+import { useQuietMotion } from "../hooks/useExperience";
+import { AssetImage } from "./AssetImage";
 import { useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Plus, Search } from "lucide-react";
 import { catalogMovies } from "../data/catalog";
 import { timelineFilms } from "../data/timeline";
@@ -13,7 +15,7 @@ export function MovieExplorer({
   const [phase, setPhase] = useState(0);
   const [query, setQuery] = useState("");
   const [limit, setLimit] = useState(12);
-  const reduced = useReducedMotion();
+  const reduced = useQuietMotion();
   const films = catalogMovies.filter(
     (m) =>
       (phase === 0 || m.phase === `Phase ${phase}`) &&
@@ -82,12 +84,11 @@ export function MovieExplorer({
                 >
                   <button
                     className="universe-movie-card"
-                    data-cursor="VIEW"
                     onClick={() => onSelect(movie)}
                     aria-label={`View ${movie.title} details`}
                   >
                     <span className="universe-movie-art">
-                      <img
+                      <AssetImage
                         src={movie.image}
                         alt={`${movie.title} poster`}
                         width="600"

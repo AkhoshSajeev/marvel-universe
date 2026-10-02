@@ -1,8 +1,10 @@
+import { useQuietMotion } from "../hooks/useExperience";
+import { AssetImage } from "./AssetImage";
 import { useLayoutEffect, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Search, Shield, X, SlidersHorizontal } from "lucide-react";
 import { heroes, universeFacts, type Hero } from "../data/universe";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   rosterEntries,
   characterFilters,
@@ -21,7 +23,7 @@ export function Avengers({
   const [filter, setFilter] = useState<CharacterFilter>("ALL");
   const [query, setQuery] = useState("");
   const search = query.trim().toLowerCase();
-  const reduced = useReducedMotion();
+  const reduced = useQuietMotion();
   useLayoutEffect(() => {
     ScrollTrigger.refresh();
   }, [filter, query]);
@@ -138,11 +140,10 @@ export function Avengers({
               >
                 <button
                   className="archive-portal"
-                  data-cursor="EXPLORE"
                   onClick={() => onRecord(entry.record)}
                   aria-label={`Explore ${entry.record.title} archive file`}
                 >
-                  <img
+                  <AssetImage
                     src={entry.record.image}
                     alt={entry.record.title}
                     loading="lazy"

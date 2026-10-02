@@ -1,5 +1,6 @@
+import { useQuietMotion } from "../hooks/useExperience";
 import { useEffect, useState, type CSSProperties } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Check, RotateCcw, Sparkles } from "lucide-react";
 import { stones } from "../data/stones";
 import { ExplorerHeading } from "./ExplorerShared";
@@ -176,7 +177,7 @@ export function InfinityGauntlet() {
   const [visited, setVisited] = useState<Set<string>>(new Set());
   const [burst, setBurst] = useState(0);
   const [celebrating, setCelebrating] = useState(false);
-  const reduce = useReducedMotion();
+  const reduce = useQuietMotion();
   const stone = stones.find((s) => s.id === selected)!;
   useEffect(() => {
     if (!celebrating) return;

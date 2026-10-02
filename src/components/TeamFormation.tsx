@@ -1,5 +1,7 @@
+import { useQuietMotion } from "../hooks/useExperience";
+import { AssetImage } from "./AssetImage";
 import { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowUpRight, RotateCcw } from "lucide-react";
 import { heroes, type Hero } from "../data/universe";
 import { teams } from "../data/connections";
@@ -11,7 +13,7 @@ export function TeamFormation({
 }) {
   const [teamId, setTeamId] = useState("original");
   const [replay, setReplay] = useState(0);
-  const reduce = useReducedMotion();
+  const reduce = useQuietMotion();
   const team = teams.find((t) => t.id === teamId)!;
   return (
     <section
@@ -66,7 +68,7 @@ export function TeamFormation({
                 aria-label={`Open ${hero.name} from ${team.name}`}
                 style={{ "--member-color": hero.color } as React.CSSProperties}
               >
-                <img
+                <AssetImage
                   src={hero.image}
                   alt={hero.name}
                   loading="lazy"

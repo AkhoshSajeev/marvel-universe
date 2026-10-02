@@ -1123,7 +1123,7 @@
 .load-movies:hover {
   border-color: #b47a8b;
 }
-/* One interpolated cursor and a single non-blocking chapter wipe. */
+/* Lightweight ambient particles and a non-blocking chapter wipe. */
 .ambient-canvas {
   position: fixed;
   inset: 0;
@@ -1133,63 +1133,6 @@
   pointer-events: none;
   mix-blend-mode: screen;
   opacity: 0.5;
-}
-.cinematic-cursor {
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 150;
-  pointer-events: none;
-  opacity: 0;
-  width: 0;
-  height: 0;
-  will-change: transform;
-}
-.cinematic-cursor i {
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 10px;
-  height: 10px;
-  border: 1px solid #f67b81;
-  border-radius: 50%;
-  background: #f66c7533;
-  box-shadow: 0 0 18px #f54b5555;
-  transform: translate(-50%, -50%);
-  transition:
-    width 0.25s,
-    height 0.25s,
-    background 0.25s;
-}
-.cinematic-cursor[data-expanded="true"] i {
-  width: 34px;
-  height: 34px;
-  background: #e9435110;
-  border-color: #ef7d8799;
-}
-.cinematic-cursor:not([data-label=""]) i {
-  width: 72px;
-  height: 72px;
-  background: #0b0c12a8;
-  backdrop-filter: blur(3px);
-}
-.cinematic-cursor:after {
-  content: attr(data-label);
-  position: absolute;
-  left: 0;
-  top: 0;
-  transform: translate(-50%, -50%);
-  color: #f6edef;
-  font-size: 7px;
-  letter-spacing: 1px;
-}
-.custom-cursor-on,
-.custom-cursor-on a,
-.custom-cursor-on button,
-.custom-cursor-on input,
-.custom-cursor-on select {
-  cursor: none !important;
 }
 .scene-wipe {
   position: fixed;
@@ -1726,9 +1669,6 @@ main > section:focus {
   .universe-chapters {
     gap: 22px;
   }
-  .cinematic-cursor {
-    display: none;
-  }
   .scene-wipe > span {
     font-size: 7px;
     letter-spacing: 3px;
@@ -1772,9 +1712,6 @@ main > section:focus {
   }
 }
 @media (hover: none), (pointer: coarse) {
-  .cinematic-cursor {
-    display: none;
-  }
   .universe-movie-overlay {
     opacity: 1;
     transform: none;
@@ -1789,16 +1726,8 @@ main > section:focus {
   .movie-card-shade {
     opacity: 0.55;
   }
-  .custom-cursor-on,
-  .custom-cursor-on a,
-  .custom-cursor-on button,
-  .custom-cursor-on input,
-  .custom-cursor-on select {
-    cursor: auto !important;
-  }
 }
 @media (prefers-reduced-motion: reduce) {
-  .cinematic-cursor,
   .ambient-canvas,
   .scene-wipe {
     display: none;
@@ -1818,13 +1747,6 @@ main > section:focus {
   .universe-movie-overlay,
   .movie-card-shade {
     transition: none;
-  }
-  .custom-cursor-on,
-  .custom-cursor-on a,
-  .custom-cursor-on button,
-  .custom-cursor-on input,
-  .custom-cursor-on select {
-    cursor: auto !important;
   }
 }
 @media (min-width: 641px) and (max-width: 1150px) {

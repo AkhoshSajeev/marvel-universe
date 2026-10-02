@@ -1,3 +1,4 @@
+import { AssetImage } from "./AssetImage";
 import { useState, type CSSProperties } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Crosshair } from "lucide-react";
@@ -35,7 +36,7 @@ export function Threats({
               aria-pressed={id === t.id}
               onClick={() => setId(t.id)}
             >
-              <img
+              <AssetImage
                 src={t.image}
                 alt=""
                 loading="lazy"
@@ -60,7 +61,7 @@ export function Threats({
           transition={{ duration: 0.45 }}
         >
           <div className="threat-portrait">
-            <img src={threat.image} alt={threat.name} loading="lazy" />
+            <AssetImage src={threat.image} alt={threat.name} loading="lazy" />
             <div className="threat-image-shade" />
             <span className="threat-crosshair">
               <Crosshair size={24} /> THREAT ARCHIVE /{" "}

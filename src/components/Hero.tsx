@@ -1,3 +1,6 @@
+import { useExperience } from "../hooks/useExperience";
+import { imageAsset } from "../assets/registry";
+import { AssetImage } from "./AssetImage";
 import { useEffect, useRef } from "react";
 import { ArrowDown, ArrowUpRight, Orbit, Crosshair } from "lucide-react";
 import gsap from "gsap";
@@ -8,9 +11,11 @@ import { usePointerLight } from "../hooks/usePointerLight";
 gsap.registerPlugin(ScrollTrigger);
 
 export function Hero() {
+  const { reduced, economy } = useExperience();
   const root = useRef<HTMLElement>(null);
   const lighting = usePointerLight<HTMLElement>(0);
   useEffect(() => {
+    if (reduced || economy) return;
     const media = gsap.matchMedia();
     media.add("(prefers-reduced-motion: no-preference)", () => {
       const context = gsap.context(() => {
@@ -54,7 +59,7 @@ export function Hero() {
       return () => context.revert();
     });
     return () => media.revert();
-  }, []);
+  }, [reduced, economy]);
   return (
     <section
       id="overview"
@@ -67,11 +72,11 @@ export function Hero() {
         <picture>
           <source
             media="(max-width: 640px)"
-            srcSet={`${import.meta.env.BASE_URL}images/hero-avengers-assemble.jpg`}
+            srcSet={imageAsset("hero-avengers-assemble")}
           />
-          <img
+          <AssetImage
             className="cinema-backdrop"
-            src={`${import.meta.env.BASE_URL}images/hero-avengers-official.jpg`}
+            src={imageAsset("hero-avengers-official")}
             alt=""
             fetchPriority="high"
             width={3200}

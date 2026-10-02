@@ -1,3 +1,5 @@
+import { imageAsset } from "../assets/registry";
+import { AssetImage } from "./AssetImage";
 import { useState, type CSSProperties } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
@@ -25,9 +27,9 @@ export function InfinitySaga() {
           <div className="stone-universe">
             <div className="stone-starfield" />
             <div className="infinity-ring" />
-            <img
+            <AssetImage
               className="stone-thanos"
-              src={`${import.meta.env.BASE_URL}images/threat-thanos.jpg`}
+              src={imageAsset("threat-thanos")}
               alt="Thanos, the seeker of all six Infinity Stones"
               loading="lazy"
             />

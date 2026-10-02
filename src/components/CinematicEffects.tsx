@@ -1,77 +1,14 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import gsap from "gsap";
+import { useExperience } from "../hooks/useExperience";
 /** A single lightweight canvas; animation pauses when hidden or reduced motion is requested. */
 export function CinematicEffects() {
-  const cursor = useRef<HTMLDivElement>(null);
+  const { reduced: limitedMotion, economy } = useExperience();
   const canvas = useRef<HTMLCanvasElement>(null);
   const wipe = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const media = window.matchMedia(
-      "(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)",
-    );
-    let frame = 0;
-    let x = 0,
-      y = 0,
-      tx = 0,
-      ty = 0;
-    let visible = false;
-    const hide = () => {
-      visible = false;
-      document.documentElement.classList.remove("custom-cursor-on");
-      if (cursor.current) cursor.current.style.opacity = "0";
-      cancelAnimationFrame(frame);
-      frame = 0;
-    };
-    const draw = () => {
-      x += (tx - x) * 0.24;
-      y += (ty - y) * 0.24;
-      if (cursor.current)
-        cursor.current.style.transform = `translate3d(${x}px,${y}px,0)`;
-      if (Math.abs(tx - x) + Math.abs(ty - y) > 0.2)
-        frame = requestAnimationFrame(draw);
-      else frame = 0;
-    };
-    const move = (e: PointerEvent) => {
-      if (!media.matches || e.pointerType !== "mouse") {
-        hide();
-        return;
-      }
-      tx = e.clientX;
-      ty = e.clientY;
-      if (!visible) {
-        x = tx;
-        y = ty;
-        visible = true;
-        document.documentElement.classList.add("custom-cursor-on");
-        if (cursor.current) cursor.current.style.opacity = "1";
-      }
-      const target = e.target as Element;
-      const special = target.closest("[data-cursor],.movie-card");
-      const interactive = target.closest(
-        'a,button,input,select,[role="option"]',
-      );
-      if (cursor.current) {
-        cursor.current.dataset.expanded = String(Boolean(interactive));
-        cursor.current.dataset.label =
-          special?.getAttribute("data-cursor") ??
-          (special?.matches(".movie-card") ? "VIEW" : "");
-      }
-      if (!frame) frame = requestAnimationFrame(draw);
-    };
-    window.addEventListener("pointermove", move, { passive: true });
-    window.addEventListener("blur", hide);
-    document.documentElement.addEventListener("pointerleave", hide);
-    media.addEventListener("change", hide);
-    return () => {
-      hide();
-      window.removeEventListener("pointermove", move);
-      window.removeEventListener("blur", hide);
-      document.documentElement.removeEventListener("pointerleave", hide);
-      media.removeEventListener("change", hide);
-    };
-  }, []);
-  useEffect(() => {
+    if (limitedMotion || economy) return;
     const surface = canvas.current;
     const ctx = surface?.getContext("2d");
     if (!surface || !ctx) return;
@@ -159,8 +96,9 @@ export function CinematicEffects() {
       document.removeEventListener("visibilitychange", sync);
       reduced.removeEventListener("change", sync);
     };
-  }, []);
+  }, [limitedMotion, economy]);
   useEffect(() => {
+    if (limitedMotion || economy) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     let tween: gsap.core.Timeline | undefined;
     const onClick = (event: MouseEvent) => {
@@ -203,13 +141,10 @@ export function CinematicEffects() {
       document.removeEventListener("click", onClick);
       tween?.kill();
     };
-  }, []);
+  }, [limitedMotion, economy]);
   return createPortal(
     <>
       <canvas ref={canvas} className="ambient-canvas" aria-hidden="true" />
-      <div ref={cursor} className="cinematic-cursor" aria-hidden="true">
-        <i />
-      </div>
       <div ref={wipe} className="scene-wipe" aria-hidden="true">
         <span>MARVEL UNIVERSE</span>
       </div>

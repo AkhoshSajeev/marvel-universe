@@ -1,3 +1,4 @@
+import { imageAsset } from "../assets/registry";
 export interface TimelineFilm {
   id: string;
   title: string;
@@ -374,7 +375,9 @@ export const timelineFilms: TimelineFilm[] = rows.map(
     phase,
     summary,
     characters,
-    image: `${import.meta.env.BASE_URL}images/${["avengers", "age-of-ultron", "infinity-war", "endgame"].includes(id) ? "movie" : "timeline"}-${id}.jpg`,
+    image: imageAsset(
+      `${["avengers", "age-of-ultron", "infinity-war", "endgame"].includes(id) ? "movie" : "timeline"}-${id}`,
+    ),
     connections: (
       links[id] ??
       (rows[index + 1]

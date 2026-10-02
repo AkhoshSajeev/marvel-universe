@@ -1,0 +1,554 @@
+[
+  {
+    "id": "ant-man",
+    "source": "images/ant-man.jpg",
+    "file": "assets/optimized/ant-man.webp",
+    "width": 900,
+    "height": 920,
+    "bytes": 144196
+  },
+  {
+    "id": "black-panther",
+    "source": "images/black-panther.jpg",
+    "file": "assets/optimized/black-panther.webp",
+    "width": 900,
+    "height": 920,
+    "bytes": 116374
+  },
+  {
+    "id": "black-widow",
+    "source": "images/black-widow.jpg",
+    "file": "assets/optimized/black-widow.webp",
+    "width": 900,
+    "height": 920,
+    "bytes": 123682
+  },
+  {
+    "id": "captain-america",
+    "source": "images/captain-america.jpg",
+    "file": "assets/optimized/captain-america.webp",
+    "width": 900,
+    "height": 920,
+    "bytes": 67058
+  },
+  {
+    "id": "captain-marvel",
+    "source": "images/captain-marvel.jpg",
+    "file": "assets/optimized/captain-marvel.webp",
+    "width": 900,
+    "height": 920,
+    "bytes": 90356
+  },
+  {
+    "id": "doctor-strange",
+    "source": "images/doctor-strange.jpg",
+    "file": "assets/optimized/doctor-strange.webp",
+    "width": 900,
+    "height": 920,
+    "bytes": 83870
+  },
+  {
+    "id": "falcon",
+    "source": "images/falcon.jpg",
+    "file": "assets/optimized/falcon.webp",
+    "width": 900,
+    "height": 920,
+    "bytes": 95150
+  },
+  {
+    "id": "hawkeye",
+    "source": "images/hawkeye.jpg",
+    "file": "assets/optimized/hawkeye.webp",
+    "width": 900,
+    "height": 920,
+    "bytes": 73222
+  },
+  {
+    "id": "hero-avengers-assemble",
+    "source": "images/hero-avengers-assemble.jpg",
+    "file": "assets/optimized/hero-avengers-assemble.webp",
+    "width": 2000,
+    "height": 1124,
+    "bytes": 154846
+  },
+  {
+    "id": "hero-avengers-official",
+    "source": "images/hero-avengers-official.jpg",
+    "file": "assets/optimized/hero-avengers-official.webp",
+    "width": 2560,
+    "height": 854,
+    "bytes": 200728
+  },
+  {
+    "id": "hero-avengers",
+    "source": "images/hero-avengers.jpg",
+    "file": "assets/optimized/hero-avengers.webp",
+    "width": 2560,
+    "height": 1440,
+    "bytes": 277722
+  },
+  {
+    "id": "hero-official",
+    "source": "images/hero-official.jpg",
+    "file": "assets/optimized/hero-official.webp",
+    "width": 1920,
+    "height": 640,
+    "bytes": 54450
+  },
+  {
+    "id": "hero",
+    "source": "images/hero.jpg",
+    "file": "assets/optimized/hero.webp",
+    "width": 2560,
+    "height": 1440,
+    "bytes": 180614
+  },
+  {
+    "id": "hulk",
+    "source": "images/hulk.jpg",
+    "file": "assets/optimized/hulk.webp",
+    "width": 900,
+    "height": 920,
+    "bytes": 117586
+  },
+  {
+    "id": "iron-man",
+    "source": "images/iron-man.jpg",
+    "file": "assets/optimized/iron-man.webp",
+    "width": 900,
+    "height": 920,
+    "bytes": 54848
+  },
+  {
+    "id": "loki",
+    "source": "images/loki.jpg",
+    "file": "assets/optimized/loki.webp",
+    "width": 900,
+    "height": 920,
+    "bytes": 95374
+  },
+  {
+    "id": "movie-age-of-ultron",
+    "source": "images/movie-age-of-ultron.jpg",
+    "file": "assets/optimized/movie-age-of-ultron.webp",
+    "width": 764,
+    "height": 1132,
+    "bytes": 129864
+  },
+  {
+    "id": "movie-avengers",
+    "source": "images/movie-avengers.jpg",
+    "file": "assets/optimized/movie-avengers.webp",
+    "width": 764,
+    "height": 1132,
+    "bytes": 160618
+  },
+  {
+    "id": "movie-endgame",
+    "source": "images/movie-endgame.jpg",
+    "file": "assets/optimized/movie-endgame.webp",
+    "width": 764,
+    "height": 1132,
+    "bytes": 190448
+  },
+  {
+    "id": "movie-infinity-war",
+    "source": "images/movie-infinity-war.jpg",
+    "file": "assets/optimized/movie-infinity-war.webp",
+    "width": 764,
+    "height": 1132,
+    "bytes": 163738
+  },
+  {
+    "id": "nick-fury",
+    "source": "images/nick-fury.jpg",
+    "file": "assets/optimized/nick-fury.webp",
+    "width": 900,
+    "height": 920,
+    "bytes": 110648
+  },
+  {
+    "id": "scarlet-witch",
+    "source": "images/scarlet-witch.jpg",
+    "file": "assets/optimized/scarlet-witch.webp",
+    "width": 900,
+    "height": 920,
+    "bytes": 103216
+  },
+  {
+    "id": "spider-man",
+    "source": "images/spider-man.jpg",
+    "file": "assets/optimized/spider-man.webp",
+    "width": 900,
+    "height": 920,
+    "bytes": 103742
+  },
+  {
+    "id": "thor",
+    "source": "images/thor.jpg",
+    "file": "assets/optimized/thor.webp",
+    "width": 900,
+    "height": 920,
+    "bytes": 48834
+  },
+  {
+    "id": "threat-doctor-doom",
+    "source": "images/threat-doctor-doom.jpg",
+    "file": "assets/optimized/threat-doctor-doom.webp",
+    "width": 900,
+    "height": 507,
+    "bytes": 21030
+  },
+  {
+    "id": "threat-green-goblin",
+    "source": "images/threat-green-goblin.jpg",
+    "file": "assets/optimized/threat-green-goblin.webp",
+    "width": 900,
+    "height": 506,
+    "bytes": 22448
+  },
+  {
+    "id": "threat-hela",
+    "source": "images/threat-hela.jpg",
+    "file": "assets/optimized/threat-hela.webp",
+    "width": 900,
+    "height": 508,
+    "bytes": 45642
+  },
+  {
+    "id": "threat-kang",
+    "source": "images/threat-kang.jpg",
+    "file": "assets/optimized/threat-kang.webp",
+    "width": 900,
+    "height": 506,
+    "bytes": 18578
+  },
+  {
+    "id": "threat-killmonger",
+    "source": "images/threat-killmonger.jpg",
+    "file": "assets/optimized/threat-killmonger.webp",
+    "width": 900,
+    "height": 474,
+    "bytes": 42038
+  },
+  {
+    "id": "threat-red-skull",
+    "source": "images/threat-red-skull.jpg",
+    "file": "assets/optimized/threat-red-skull.webp",
+    "width": 900,
+    "height": 505,
+    "bytes": 12646
+  },
+  {
+    "id": "threat-thanos",
+    "source": "images/threat-thanos.jpg",
+    "file": "assets/optimized/threat-thanos.webp",
+    "width": 900,
+    "height": 474,
+    "bytes": 25444
+  },
+  {
+    "id": "threat-ultron",
+    "source": "images/threat-ultron.jpg",
+    "file": "assets/optimized/threat-ultron.webp",
+    "width": 620,
+    "height": 390,
+    "bytes": 40264
+  },
+  {
+    "id": "timeline-ant-man-wasp",
+    "source": "images/timeline-ant-man-wasp.jpg",
+    "file": "assets/optimized/timeline-ant-man-wasp.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 43330
+  },
+  {
+    "id": "timeline-ant-man",
+    "source": "images/timeline-ant-man.jpg",
+    "file": "assets/optimized/timeline-ant-man.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 39680
+  },
+  {
+    "id": "timeline-black-panther",
+    "source": "images/timeline-black-panther.jpg",
+    "file": "assets/optimized/timeline-black-panther.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 30420
+  },
+  {
+    "id": "timeline-black-widow",
+    "source": "images/timeline-black-widow.jpg",
+    "file": "assets/optimized/timeline-black-widow.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 30514
+  },
+  {
+    "id": "timeline-brave-new-world",
+    "source": "images/timeline-brave-new-world.jpg",
+    "file": "assets/optimized/timeline-brave-new-world.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 41850
+  },
+  {
+    "id": "timeline-captain-marvel",
+    "source": "images/timeline-captain-marvel.jpg",
+    "file": "assets/optimized/timeline-captain-marvel.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 40290
+  },
+  {
+    "id": "timeline-civil-war",
+    "source": "images/timeline-civil-war.jpg",
+    "file": "assets/optimized/timeline-civil-war.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 40918
+  },
+  {
+    "id": "timeline-dark-world",
+    "source": "images/timeline-dark-world.jpg",
+    "file": "assets/optimized/timeline-dark-world.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 36446
+  },
+  {
+    "id": "timeline-deadpool-wolverine",
+    "source": "images/timeline-deadpool-wolverine.jpg",
+    "file": "assets/optimized/timeline-deadpool-wolverine.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 43304
+  },
+  {
+    "id": "timeline-doctor-strange",
+    "source": "images/timeline-doctor-strange.jpg",
+    "file": "assets/optimized/timeline-doctor-strange.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 39910
+  },
+  {
+    "id": "timeline-eternals",
+    "source": "images/timeline-eternals.jpg",
+    "file": "assets/optimized/timeline-eternals.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 31118
+  },
+  {
+    "id": "timeline-far-from-home",
+    "source": "images/timeline-far-from-home.jpg",
+    "file": "assets/optimized/timeline-far-from-home.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 75500
+  },
+  {
+    "id": "timeline-first-avenger",
+    "source": "images/timeline-first-avenger.jpg",
+    "file": "assets/optimized/timeline-first-avenger.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 39506
+  },
+  {
+    "id": "timeline-first-steps",
+    "source": "images/timeline-first-steps.jpg",
+    "file": "assets/optimized/timeline-first-steps.webp",
+    "width": 324,
+    "height": 480,
+    "bytes": 28704
+  },
+  {
+    "id": "timeline-guardians-2",
+    "source": "images/timeline-guardians-2.jpg",
+    "file": "assets/optimized/timeline-guardians-2.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 60882
+  },
+  {
+    "id": "timeline-guardians-3",
+    "source": "images/timeline-guardians-3.jpg",
+    "file": "assets/optimized/timeline-guardians-3.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 43926
+  },
+  {
+    "id": "timeline-guardians",
+    "source": "images/timeline-guardians.jpg",
+    "file": "assets/optimized/timeline-guardians.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 49762
+  },
+  {
+    "id": "timeline-homecoming",
+    "source": "images/timeline-homecoming.jpg",
+    "file": "assets/optimized/timeline-homecoming.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 30890
+  },
+  {
+    "id": "timeline-incredible-hulk",
+    "source": "images/timeline-incredible-hulk.jpg",
+    "file": "assets/optimized/timeline-incredible-hulk.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 25368
+  },
+  {
+    "id": "timeline-iron-man-2",
+    "source": "images/timeline-iron-man-2.jpg",
+    "file": "assets/optimized/timeline-iron-man-2.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 40876
+  },
+  {
+    "id": "timeline-iron-man-3",
+    "source": "images/timeline-iron-man-3.jpg",
+    "file": "assets/optimized/timeline-iron-man-3.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 57006
+  },
+  {
+    "id": "timeline-iron-man",
+    "source": "images/timeline-iron-man.jpg",
+    "file": "assets/optimized/timeline-iron-man.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 25468
+  },
+  {
+    "id": "timeline-love-thunder",
+    "source": "images/timeline-love-thunder.jpg",
+    "file": "assets/optimized/timeline-love-thunder.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 32336
+  },
+  {
+    "id": "timeline-multiverse-madness",
+    "source": "images/timeline-multiverse-madness.jpg",
+    "file": "assets/optimized/timeline-multiverse-madness.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 20334
+  },
+  {
+    "id": "timeline-no-way-home",
+    "source": "images/timeline-no-way-home.jpg",
+    "file": "assets/optimized/timeline-no-way-home.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 41614
+  },
+  {
+    "id": "timeline-quantumania",
+    "source": "images/timeline-quantumania.jpg",
+    "file": "assets/optimized/timeline-quantumania.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 53122
+  },
+  {
+    "id": "timeline-ragnarok",
+    "source": "images/timeline-ragnarok.jpg",
+    "file": "assets/optimized/timeline-ragnarok.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 58132
+  },
+  {
+    "id": "timeline-shang-chi",
+    "source": "images/timeline-shang-chi.jpg",
+    "file": "assets/optimized/timeline-shang-chi.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 42506
+  },
+  {
+    "id": "timeline-the-marvels",
+    "source": "images/timeline-the-marvels.jpg",
+    "file": "assets/optimized/timeline-the-marvels.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 53234
+  },
+  {
+    "id": "timeline-thor",
+    "source": "images/timeline-thor.jpg",
+    "file": "assets/optimized/timeline-thor.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 27116
+  },
+  {
+    "id": "timeline-thunderbolts",
+    "source": "images/timeline-thunderbolts.jpg",
+    "file": "assets/optimized/timeline-thunderbolts.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 46454
+  },
+  {
+    "id": "timeline-wakanda-forever",
+    "source": "images/timeline-wakanda-forever.jpg",
+    "file": "assets/optimized/timeline-wakanda-forever.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 49336
+  },
+  {
+    "id": "timeline-winter-soldier",
+    "source": "images/timeline-winter-soldier.jpg",
+    "file": "assets/optimized/timeline-winter-soldier.webp",
+    "width": 382,
+    "height": 566,
+    "bytes": 44450
+  },
+  {
+    "id": "vision",
+    "source": "images/vision.jpg",
+    "file": "assets/optimized/vision.webp",
+    "width": 900,
+    "height": 920,
+    "bytes": 82090
+  },
+  {
+    "id": "war-machine",
+    "source": "images/war-machine.jpg",
+    "file": "assets/optimized/war-machine.webp",
+    "width": 900,
+    "height": 920,
+    "bytes": 109048
+  },
+  {
+    "id": "winter-soldier",
+    "source": "images/winter-soldier.jpg",
+    "file": "assets/optimized/winter-soldier.webp",
+    "width": 900,
+    "height": 920,
+    "bytes": 120844
+  },
+  {
+    "id": "wolverine",
+    "source": "images/wolverine.jpg",
+    "file": "assets/optimized/wolverine.webp",
+    "width": 900,
+    "height": 900,
+    "bytes": 186880
+  }
+]

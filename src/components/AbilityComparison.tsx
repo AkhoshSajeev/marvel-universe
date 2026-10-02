@@ -1,5 +1,6 @@
+import { useQuietMotion } from "../hooks/useExperience";
 import { useState, type CSSProperties } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeftRight, ArrowUpRight } from "lucide-react";
 import { heroes, type Hero } from "../data/universe";
 import { comparisonCategories, comparisonProfiles } from "../data/comparison";
@@ -12,7 +13,7 @@ export function AbilityComparison({
   const [left, setLeft] = useState("iron-man");
   const [right, setRight] = useState("thor");
   const [category, setCategory] = useState(0);
-  const reduced = useReducedMotion();
+  const reduced = useQuietMotion();
   const a = heroes.find((h) => h.id === left)!;
   const b = heroes.find((h) => h.id === right)!;
   return (

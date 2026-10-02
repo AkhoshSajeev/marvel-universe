@@ -1,3 +1,4 @@
+import { AssetImage } from "./AssetImage";
 import { ArrowUpRight, Play, MoveRight } from "lucide-react";
 import { movies, type Movie } from "../data/universe";
 
@@ -41,7 +42,7 @@ export function Saga({ onSelect }: { onSelect: (movie: Movie) => void }) {
               <span className="movie-phase">{movie.phase}</span>
             </span>
             <span className="movie-poster">
-              <img
+              <AssetImage
                 src={movie.image}
                 alt={`${movie.title} poster`}
                 width={500}

@@ -1,3 +1,4 @@
+import { AssetImage } from "./AssetImage";
 import { useState, type CSSProperties } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Network } from "lucide-react";
@@ -106,7 +107,7 @@ export function Connections({ onSelect }: { onSelect: (hero: Hero) => void }) {
               onClick={() => onSelect(hero)}
               aria-label={`Open ${hero.name} dossier`}
             >
-              <img src={hero.image} alt="" loading="lazy" />
+              <AssetImage src={hero.image} alt="" loading="lazy" />
               <strong>{hero.name}</strong>
               <small>
                 OPEN DOSSIER <ArrowUpRight size={10} />
@@ -129,7 +130,7 @@ export function Connections({ onSelect }: { onSelect: (hero: Hero) => void }) {
                 onClick={() => setSelected(n.hero.id)}
                 aria-label={`Focus network on ${n.hero.name}: ${n.link.kind}`}
               >
-                <img src={n.hero.image} alt="" loading="lazy" />
+                <AssetImage src={n.hero.image} alt="" loading="lazy" />
                 <strong>{n.hero.name}</strong>
                 <small>{n.link.kind}</small>
               </motion.button>
@@ -191,7 +192,13 @@ export function Connections({ onSelect }: { onSelect: (hero: Hero) => void }) {
               aria-label={`Show ${h.name} connections`}
               onClick={() => setSelected(h.id)}
             >
-              <img src={h.image} alt="" loading="lazy" width="64" height="64" />
+              <AssetImage
+                src={h.image}
+                alt=""
+                loading="lazy"
+                width="64"
+                height="64"
+              />
               <span>{h.name}</span>
             </button>
           ))}

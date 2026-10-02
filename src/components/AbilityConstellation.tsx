@@ -1,3 +1,4 @@
+import { useQuietMotion } from "../hooks/useExperience";
 import { useState } from "react";
 import {
   Brain,
@@ -14,7 +15,7 @@ import {
   Zap,
   type LucideIcon,
 } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import type { Ability, AbilityIcon } from "../data/universe";
 
 const abilityIcons: Record<AbilityIcon, LucideIcon> = {
@@ -40,7 +41,7 @@ export function AbilityConstellation({
   heroName: string;
 }) {
   const [selectedId, setSelectedId] = useState(abilities[0]?.id);
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = useQuietMotion();
   const selected =
     abilities.find((ability) => ability.id === selectedId) ?? abilities[0];
   if (!selected) return null;

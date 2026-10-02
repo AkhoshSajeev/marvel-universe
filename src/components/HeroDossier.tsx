@@ -1,3 +1,5 @@
+import { handleArtworkError } from "./AssetImage";
+import { useQuietMotion } from "../hooks/useExperience";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import {
   ArrowDown,
@@ -8,7 +10,7 @@ import {
   Crosshair,
   ScanLine,
 } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { heroes, type Hero } from "../data/universe";
 import { AbilityConstellation } from "./AbilityConstellation";
 import { DossierAtmosphere } from "./CinematicEffects";
@@ -26,7 +28,7 @@ export function HeroDossier({
   onSelect: (hero: Hero) => void;
 }) {
   const index = heroes.findIndex((entry) => entry.id === hero.id);
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = useQuietMotion();
   const content = useRef<HTMLDivElement>(null);
   const timeline = useRef<HTMLDivElement>(null);
   const [timelineEnds, setTimelineEnds] = useState({ start: true, end: false });
@@ -115,6 +117,7 @@ export function HeroDossier({
       >
         <div className="experience-portrait">
           <motion.img
+            onError={handleArtworkError}
             key={`${hero.id}-portrait`}
             className="experience-portrait-image"
             src={hero.image}

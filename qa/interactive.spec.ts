@@ -213,7 +213,7 @@ test("movie universe reveals the complete archive and opens connected cinematic 
   await expect(page.locator("iframe")).toHaveCount(0);
 });
 
-test("desktop cursor interpolates and shows action labels; reduced motion disables it", async ({
+test("native pointer remains visible with full and reduced motion", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
@@ -221,19 +221,15 @@ test("desktop cursor interpolates and shows action labels; reduced motion disabl
   await page
     .getByRole("button", { name: "Explore Iron Man, Tony Stark", exact: true })
     .hover();
-  await expect(page.locator(".cinematic-cursor")).toHaveAttribute(
-    "data-label",
-    "EXPLORE",
-  );
-  await expect(page.locator("html")).toHaveClass(/custom-cursor-on/);
-  await page.locator(".universe-movie-card").first().hover();
-  await expect(page.locator(".cinematic-cursor")).toHaveAttribute(
-    "data-label",
-    "VIEW",
+  await expect(page.locator(".cinematic-cursor")).toHaveCount(0);
+  await expect(page.locator("html")).not.toHaveClass(/custom-cursor-on/);
+  await expect(page.locator("body")).not.toHaveCSS("cursor", "none");
+  await expect(page.locator(".character-portal").first()).not.toHaveCSS(
+    "cursor",
+    "none",
   );
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await expect(page.locator("html")).not.toHaveClass(/custom-cursor-on/);
-  await expect(page.locator(".cinematic-cursor")).not.toBeVisible();
+  await expect(page.locator(".cinematic-cursor")).toHaveCount(0);
 });
 
 test("animated section transitions navigate and preserve keyboard access", async ({

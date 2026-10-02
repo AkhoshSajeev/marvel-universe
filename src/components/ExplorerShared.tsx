@@ -1,3 +1,4 @@
+import { AssetImage } from "./AssetImage";
 import { ArrowUpRight } from "lucide-react";
 import { heroes, type Hero } from "../data/universe";
 export function ExplorerHeading({
@@ -53,7 +54,7 @@ export function HeroLinks({
           const hero = heroes.find((h) => h.id === id);
           return hero ? (
             <button key={id} onClick={() => onSelect(hero)}>
-              <img src={hero.image} alt="" loading="lazy" />
+              <AssetImage src={hero.image} alt="" loading="lazy" />
               {hero.name}
               <ArrowUpRight size={12} />
             </button>

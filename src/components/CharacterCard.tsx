@@ -1,5 +1,7 @@
+import { useQuietMotion } from "../hooks/useExperience";
+import { AssetImage } from "./AssetImage";
 import { ArrowUpRight, Fingerprint, Plus, Zap } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import type { CSSProperties } from "react";
 import type { Hero } from "../data/universe";
 import { usePointerLight } from "../hooks/usePointerLight";
@@ -14,7 +16,7 @@ export function CharacterCard({
   onSelect: (hero: Hero) => void;
 }) {
   const pointer = usePointerLight<HTMLButtonElement>(6);
-  const reduced = useReducedMotion();
+  const reduced = useQuietMotion();
   return (
     <motion.article
       className="character-entry"
@@ -27,14 +29,13 @@ export function CharacterCard({
     >
       <button
         className="character-portal"
-        data-cursor="EXPLORE"
         {...pointer}
         onClick={() => onSelect(hero)}
         aria-label={`Explore ${hero.name}, ${hero.alias}`}
       >
         <span className="character-frame">
           <span className="character-body">
-            <img
+            <AssetImage
               className="character-image"
               src={hero.image}
               alt={hero.name}

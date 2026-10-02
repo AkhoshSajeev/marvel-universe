@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useRef, type PointerEvent } from "react";
-import { useReducedMotion } from "framer-motion";
+import { useExperience } from "./useExperience";
 
 /** Pointer coordinates stay outside React's render loop. Touch and reduced motion stay still. */
 export function usePointerLight<T extends HTMLElement>(tilt = 4) {
   const frame = useRef(0);
-  const reduced = useReducedMotion();
+  const { reduced, economy } = useExperience();
   const onPointerMove = useCallback(
     (event: PointerEvent<T>) => {
-      if (reduced || event.pointerType !== "mouse") return;
+      if (reduced || economy || event.pointerType !== "mouse") return;
       const element = event.currentTarget;
       const { clientX, clientY } = event;
       cancelAnimationFrame(frame.current);
@@ -29,7 +29,7 @@ export function usePointerLight<T extends HTMLElement>(tilt = 4) {
         element.style.setProperty("--image-y", `${(y - 0.5) * 10}px`);
       });
     },
-    [reduced, tilt],
+    [reduced, economy, tilt],
   );
   const onPointerLeave = useCallback((event: PointerEvent<T>) => {
     cancelAnimationFrame(frame.current);

@@ -1,6 +1,7 @@
+import { useQuietMotion } from "../hooks/useExperience";
 import { useEffect, useRef, type ReactNode } from "react";
 import { createPortal } from "react-dom";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { X } from "lucide-react";
 
 let externalDialogOpener: HTMLElement | null = null;
@@ -17,7 +18,7 @@ export function Modal({
   className?: string;
 }) {
   const content = useRef<HTMLDivElement>(null);
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = useQuietMotion();
   useEffect(() => {
     const previous = document.activeElement as HTMLElement | null;
     if (

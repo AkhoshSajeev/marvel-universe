@@ -1,3 +1,4 @@
+import { AssetImage } from "./AssetImage";
 import { useState } from "react";
 import { ArrowUpRight, Play, Clock3 } from "lucide-react";
 import { catalogMovies } from "../data/catalog";
@@ -40,7 +41,7 @@ export function MovieDialog({
           />
         ) : (
           <>
-            <img src={movie.image} alt="" />
+            <AssetImage src={movie.image} alt="" />
             <div className="movie-screen-shade" />
             {videoId ? (
               <button

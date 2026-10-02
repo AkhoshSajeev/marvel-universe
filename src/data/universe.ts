@@ -1,3 +1,4 @@
+import { imageAsset } from "../assets/registry";
 export type AbilityIcon =
   | "cpu"
   | "brain"
@@ -51,8 +52,7 @@ export interface Movie {
   trailerUrl: string;
 }
 
-const image = (filename: string) =>
-  `${import.meta.env.BASE_URL}images/${filename}.jpg`;
+const image = imageAsset;
 
 const ability = (
   label: string,
