@@ -31,7 +31,9 @@ If you rename the repository, update `base` in `vite.config.ts`. Assets in `publ
 - `src/App.tsx` assembles the experience.
 - `src/components/` holds reusable interface components.
 - `src/data/` keeps character and movie content separate from presentation.
-- `src/styles.css` defines the cinematic visual system and responsive styles.
+- `src/styles.css` defines shared typography, navigation, and the film archive.
+- `src/cinema.css` defines the cinematic hero and character archive.
+- `src/dossier.css` defines the full-screen character experience.
 - `public/` contains static imagery and assets.
 - `.github/workflows/deploy.yml` builds and deploys the static site.
 
@@ -39,11 +41,11 @@ This is an unofficial fan project. Marvel names, characters, and related tradema
 
 ## Experience and accessibility
 
-Explore six hero dossiers, filter the roster, move between heroes with the left/right arrow keys, and open each film's official trailer. Dialogs support Escape, trap keyboard focus, and return focus to the launch button. The optional sound switch creates a quiet ambient drone with the Web Audio API; it starts only after a user click and turns off when the tab is hidden.
+Explore 18 full-screen character dossiers, search and filter the roster, and open each film's official trailer. Each dossier includes identity, an interactive qualitative ability constellation, equipment, and a horizontally scrollable story timeline. Left/right arrow keys switch characters outside the ability and timeline controls. Dialogs support Escape, trap keyboard focus, and return focus to the launch button. The optional sound switch creates a quiet ambient drone with the Web Audio API; it starts only after a user click and turns off when the tab is hidden.
 
 GSAP handles entrance and scroll animation; Framer Motion handles interactive transitions. Both respect the operating system's reduced-motion setting. Images and fonts are local. Trailer playback uses YouTube's privacy-enhanced embed after clicking play and requires internet access; an official external trailer link is also provided.
 
-Artwork sources and transformations are recorded in `public/asset-sources.json`. Font licenses are in `public/fonts/`. Hero profile scores are editorial fan ratings rather than official Marvel power rankings.
+Artwork sources and transformations are recorded in `public/asset-sources.json`. Font licenses are in `public/fonts/`. Ability diagrams describe capabilities without numerical power rankings. Each profile declares its story snapshot; most cover the Infinity Saga through Endgame, and Scarlet Witch extends through WandaVision. Timeline years are film/series release years rather than in-universe dates.
 
 ## Verification
 
@@ -54,5 +56,6 @@ npm run build
 npm run test:e2e
 ```
 
-The eight Playwright smoke tests run against the production preview and cover local asset loading, hero navigation, filters, dialog focus, trailer integration, mobile navigation, and responsive keyboard behavior. The trailer test mocks YouTube's network response; actual video availability depends on YouTube.
+The Playwright smoke tests run against the production preview and cover local asset loading, hero navigation, search and filters, full-screen dialog focus, ability selection, equipment, timeline scrolling, trailer integration, mobile navigation, and responsive layouts. The trailer test mocks YouTube's network response; actual video availability depends on YouTube.
+
 # marvel-universe

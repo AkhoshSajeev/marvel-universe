@@ -1,30 +1,45 @@
 import { useEffect, useRef } from "react";
-import { ArrowDown, ArrowUpRight, Play, Crosshair } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Orbit, Crosshair } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { usePointerLight } from "../hooks/usePointerLight";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function Hero({ onTrailer }: { onTrailer: () => void }) {
+export function Hero() {
   const root = useRef<HTMLElement>(null);
+  const lighting = usePointerLight<HTMLElement>(0);
   useEffect(() => {
-    const mm = gsap.matchMedia();
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const ctx = gsap.context(() => {
-        gsap.from(".hero-reveal", {
-          y: 34,
-          opacity: 0,
-          duration: 1,
-          stagger: 0.12,
-          ease: "power3.out",
-          delay: 0.12,
-        });
-        gsap.fromTo(
-          ".hero-backdrop",
-          { scale: 1.06 },
-          { scale: 1, duration: 2.2, ease: "power2.out" },
-        );
-        gsap.to(".hero-art", {
+    const media = gsap.matchMedia();
+    media.add("(prefers-reduced-motion: no-preference)", () => {
+      const context = gsap.context(() => {
+        const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+        intro
+          .fromTo(
+            ".cinema-backdrop",
+            { scale: 1.12, filter: "brightness(.3) saturate(.6)" },
+            { scale: 1, filter: "brightness(.8) saturate(.8)", duration: 2.8 },
+            0,
+          )
+          .from(".cinema-overline", { opacity: 0, y: 15, duration: 0.8 }, 0.35)
+          .from(
+            ".cinema-title-letter",
+            {
+              yPercent: 120,
+              opacity: 0,
+              rotateX: -45,
+              duration: 1.15,
+              stagger: 0.065,
+            },
+            0.5,
+          )
+          .from(
+            ".cinema-subtitle, .cinema-description, .cinema-buttons",
+            { opacity: 0, y: 20, duration: 0.85, stagger: 0.13 },
+            1.15,
+          )
+          .from(".cinema-bottom", { opacity: 0, duration: 1 }, 1.7);
+        gsap.to(".cinema-art", {
           yPercent: 15,
           ease: "none",
           scrollTrigger: {
@@ -35,94 +50,110 @@ export function Hero({ onTrailer }: { onTrailer: () => void }) {
           },
         });
       }, root);
-      return () => ctx.revert();
+      return () => context.revert();
     });
-    return () => mm.revert();
+    return () => media.revert();
   }, []);
   return (
     <section
-      className="hero"
       id="overview"
+      className="cinema-hero"
       ref={root}
       aria-labelledby="hero-title"
+      {...lighting}
     >
-      <div className="hero-art" aria-hidden="true">
-        <img
-          className="hero-backdrop"
-          src={`${import.meta.env.BASE_URL}images/hero.jpg`}
-          alt=""
-          fetchPriority="high"
-        />
-        <div className="hero-shade" />
+      <div className="cinema-art" aria-hidden="true">
+        <picture>
+          <source
+            media="(max-width: 640px)"
+            srcSet={`${import.meta.env.BASE_URL}images/hero-avengers-assemble.jpg`}
+          />
+          <img
+            className="cinema-backdrop"
+            src={`${import.meta.env.BASE_URL}images/hero-avengers-official.jpg`}
+            alt=""
+            fetchPriority="high"
+            width={3200}
+            height={1067}
+          />
+        </picture>
       </div>
-      <div className="hero-grid" aria-hidden="true" />
-      <div className="embers" aria-hidden="true">
-        {Array.from({ length: 12 }, (_, i) => (
+      <div className="cinema-shade" aria-hidden="true" />
+      <div className="cinema-light" aria-hidden="true" />
+      <div className="cinema-rays" aria-hidden="true" />
+      <div className="cinema-smoke cinema-smoke-one" aria-hidden="true" />
+      <div className="cinema-smoke cinema-smoke-two" aria-hidden="true" />
+      <div className="cinema-dust" aria-hidden="true">
+        {Array.from({ length: 22 }, (_, i) => (
           <i
             key={i}
             style={{
-              left: `${8 + i * 7.3}%`,
-              animationDelay: `${i * -1.7}s`,
-              animationDuration: `${9 + (i % 4) * 3}s`,
+              left: `${(i * 17 + 3) % 100}%`,
+              animationDelay: `${i * -0.9}s`,
+              animationDuration: `${10 + (i % 5) * 2}s`,
+              width: `${(i % 3) + 1}px`,
+              height: `${(i % 3) + 1}px`,
             }}
           />
         ))}
       </div>
-      <div className="hero-content page-gutter">
-        <div className="hero-eyebrow hero-reveal">
-          <span className="live-dot" /> MARVEL UNIVERSE{" "}
-          <span className="eyebrow-slash">/</span> THE AVENGERS
-        </div>
-        <h1 id="hero-title" className="hero-reveal">
-          EARTH’S
-          <br />
-          MIGHTIEST
-          <br />
-          <span>HEROES.</span>
-        </h1>
-        <p className="hero-description hero-reveal">
-          One universe. Infinite stories.
-          <br />
-          Some are born heroes. Others choose to become them.
-        </p>
-        <div className="hero-buttons hero-reveal">
-          <a className="button button-red" href="#avengers">
-            MEET THE AVENGERS <ArrowUpRight size={18} />
-          </a>
-          <button className="button button-ghost" onClick={onTrailer}>
-            <span className="play-ring">
-              <Play size={12} fill="currentColor" />
-            </span>
-            WATCH THE TRAILER
-          </button>
-        </div>
-        <div className="hero-quote hero-reveal">
-          <span />
-          “If we can’t protect the Earth, you can be damn well sure we’ll avenge
-          it.”<small>TONY STARK</small>
-        </div>
-      </div>
-      <div className="hero-coordinate" aria-hidden="true">
-        <Crosshair size={19} />
+      <div className="cinema-side-label" aria-hidden="true">
+        <Crosshair size={16} />
         <span>
-          AVENGERS INITIATIVE
+          INITIATIVE 001
           <br />
-          <b>STATUS: ASSEMBLED</b>
+          EARTH’S LAST LINE OF DEFENSE
         </span>
       </div>
-      <div className="hero-bottom page-gutter">
+      <div className="cinema-content page-gutter">
+        <div className="cinema-overline">
+          <span className="live-dot" /> MARVEL UNIVERSE{" "}
+          <span className="cinema-overline-rule" /> THE INFINITY SAGA
+        </div>
+        <h1 id="hero-title" className="cinema-title" aria-label="THE AVENGERS">
+          <span className="cinema-title-the" aria-hidden="true">
+            THE
+          </span>
+          <span className="cinema-title-word" aria-hidden="true">
+            {"AVENGERS".split("").map((letter, index) => (
+              <span className="cinema-title-letter" key={index}>
+                {letter}
+              </span>
+            ))}
+          </span>
+        </h1>
+        <p className="cinema-subtitle">Earth’s Mightiest Heroes</p>
+        <p className="cinema-description">
+          Extraordinary people. Impossible odds. One unbreakable alliance.
+          <br /> Enter the universe of heroes who chose to stand together.
+        </p>
+        <div className="cinema-buttons">
+          <a className="button button-red" href="#avengers">
+            EXPLORE THE AVENGERS <ArrowUpRight size={18} />
+          </a>
+          <a className="button cinema-secondary" href="#saga">
+            <Orbit size={16} />
+            EXPLORE THE MCU <ArrowUpRight size={16} />
+          </a>
+        </div>
+      </div>
+      <div className="cinema-bottom page-gutter">
         <a href="#avengers" className="scroll-cue">
           <span className="scroll-icon">
-            <ArrowDown size={15} />
+            <ArrowDown size={14} />
           </span>
-          SCROLL TO DISCOVER
+          ENTER THE UNIVERSE
         </a>
-        <span className="hero-bottom-caption">
-          SIX HEROES. <span>ONE EXTRAORDINARY LEGACY.</span>
+        <span>
+          18 CHARACTERS <i /> INFINITE POSSIBILITIES
         </span>
-        <span className="hero-index">
-          <b>01</b>
-          <span>/</span>03
+        <span className="cinema-signal">
+          <i />
+          <i />
+          <i />
+          <i />
+          <i />
+          <i /> ALL SYSTEMS ONLINE
         </span>
       </div>
     </section>

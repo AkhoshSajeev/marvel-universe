@@ -9,7 +9,7 @@ import { Avengers } from "./components/Avengers";
 import { HeroDossier } from "./components/HeroDossier";
 import { Saga } from "./components/Saga";
 import { MovieDialog } from "./components/MovieDialog";
-import { movies, type Hero as HeroType, type Movie } from "./data/universe";
+import { type Hero as HeroType, type Movie } from "./data/universe";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -49,7 +49,7 @@ export default function App() {
         </a>
         <Navigation />
         <main>
-          <Hero onTrailer={() => setSelectedMovie(movies[3])} />
+          <Hero />
           <Avengers onSelect={setSelectedHero} />
           <Saga onSelect={setSelectedMovie} />
         </main>

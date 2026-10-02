@@ -72,6 +72,96 @@
       "source": "https://cdn.marvel.com/content/2x/avengersendgame_lob_crd_05.jpg",
       "sourcePage": "https://www.marvel.com/movies/avengers-endgame",
       "description": "Official Marvel movie poster"
+    },
+    {
+      "file": "images/spider-man.jpg",
+      "source": "https://cdn.marvel.com/content/2x/005smp_ons_crd_02.jpg",
+      "sourcePage": "https://www.marvel.com/characters/spider-man-peter-parker/on-screen",
+      "description": "Official Marvel on-screen character portrait; cropped 124 px from top to remove website category label; optimized progressive JPEG at 1080 × 1104 px"
+    },
+    {
+      "file": "images/doctor-strange.jpg",
+      "source": "https://cdn.marvel.com/content/2x/009drs_ons_crd_02.jpg",
+      "sourcePage": "https://www.marvel.com/characters/doctor-strange-stephen-strange/on-screen",
+      "description": "Official Marvel on-screen character portrait; cropped 124 px from top to remove website category label; optimized progressive JPEG at 1080 × 1104 px"
+    },
+    {
+      "file": "images/black-panther.jpg",
+      "source": "https://cdn.marvel.com/content/2x/007blp_ons_crd_02.jpg",
+      "sourcePage": "https://www.marvel.com/characters/black-panther-t-challa/on-screen",
+      "description": "Official Marvel on-screen character portrait; cropped 124 px from top to remove website category label; optimized progressive JPEG at 1080 × 1104 px"
+    },
+    {
+      "file": "images/scarlet-witch.jpg",
+      "source": "https://cdn.marvel.com/content/2x/012scw_ons_crd_02.jpg",
+      "sourcePage": "https://www.marvel.com/characters/scarlet-witch-wanda-maximoff/on-screen",
+      "description": "Official Marvel on-screen character portrait; cropped 124 px from top to remove website category label; optimized progressive JPEG at 1080 × 1104 px"
+    },
+    {
+      "file": "images/vision.jpg",
+      "source": "https://cdn.marvel.com/content/2x/013vis_ons_crd_01-1.jpg",
+      "sourcePage": "https://www.marvel.com/characters/vision/on-screen",
+      "description": "Official Marvel on-screen character portrait; cropped 124 px from top to remove website category label; optimized progressive JPEG at 1080 × 1104 px"
+    },
+    {
+      "file": "images/ant-man.jpg",
+      "source": "https://cdn.marvel.com/content/2x/010ant_ons_crd_03.jpg",
+      "sourcePage": "https://www.marvel.com/characters/ant-man-scott-lang/on-screen",
+      "description": "Official Marvel on-screen character portrait; cropped 124 px from top to remove website category label; optimized progressive JPEG at 1080 × 1104 px"
+    },
+    {
+      "file": "images/captain-marvel.jpg",
+      "source": "https://cdn.marvel.com/content/2x/008cmv_ons_crd_03.jpg",
+      "sourcePage": "https://www.marvel.com/characters/captain-marvel-carol-danvers/on-screen",
+      "description": "Official Marvel on-screen character portrait; cropped 124 px from top to remove website category label; optimized progressive JPEG at 1080 × 1104 px"
+    },
+    {
+      "file": "images/falcon.jpg",
+      "source": "https://cdn.marvel.com/content/2x/014fal_ons_crd_02.jpg",
+      "sourcePage": "https://www.marvel.com/characters/falcon-sam-wilson/on-screen",
+      "description": "Official Marvel on-screen character portrait; cropped 124 px from top to remove website category label; optimized progressive JPEG at 1080 × 1104 px"
+    },
+    {
+      "file": "images/winter-soldier.jpg",
+      "source": "https://cdn.marvel.com/content/2x/015wsb_ons_crd_02.jpg",
+      "sourcePage": "https://www.marvel.com/characters/winter-soldier-bucky-barnes/on-screen",
+      "description": "Official Marvel on-screen character portrait; cropped 124 px from top to remove website category label; optimized progressive JPEG at 1080 × 1104 px"
+    },
+    {
+      "file": "images/war-machine.jpg",
+      "source": "https://cdn.marvel.com/content/2x/042wmr_ons_crd_02.jpg",
+      "sourcePage": "https://www.marvel.com/characters/war-machine-james-rhodes/on-screen",
+      "description": "Official Marvel on-screen character portrait; cropped 124 px from top to remove website category label; optimized progressive JPEG at 1080 × 1104 px"
+    },
+    {
+      "file": "images/loki.jpg",
+      "source": "https://cdn.marvel.com/content/2x/017lok_ons_crd_02.jpg",
+      "sourcePage": "https://www.marvel.com/characters/loki/on-screen",
+      "description": "Official Marvel on-screen character portrait; cropped 124 px from top to remove website category label; optimized progressive JPEG at 1080 × 1104 px"
+    },
+    {
+      "file": "images/nick-fury.jpg",
+      "source": "https://cdn.marvel.com/content/2x/016nfj_ons_crd_02.jpg",
+      "sourcePage": "https://www.marvel.com/characters/nick-fury/on-screen",
+      "description": "Official Marvel on-screen character portrait; cropped 124 px from top to remove website category label; optimized progressive JPEG at 1080 × 1104 px"
+    },
+    {
+      "file": "images/hero-avengers.jpg",
+      "source": "https://images.hdqwalls.com/wallpapers/avengers-endgame-4k-team-tt.jpg",
+      "sourcePage": "https://hdqwalls.com/avengers-endgame-4k-team-wallpaper",
+      "description": "Avengers Endgame ensemble fan artwork with six founding Avengers in New York, hosted by HDQWalls; resized from 3840 × 2160 to 2560 × 1440; optimized progressive JPEG; artwork is a fan composition, not a film still"
+    },
+    {
+      "file": "images/hero-avengers-official.jpg",
+      "source": "https://cdn.marvel.com/content/2x/theavengers_lob_mas_dsk_03.jpg",
+      "sourcePage": "https://www.marvel.com/movies/the-avengers",
+      "description": "Official Marvel theatrical ensemble panorama for The Avengers (2012), with built-in dark lower gradient; resized from 3840 × 1280 to 3200 × 1067; optimized progressive JPEG"
+    },
+    {
+      "file": "images/hero-avengers-assemble.jpg",
+      "source": "https://hips.hearstapps.com/hmg-prod/images/avengers-original-lineup-2012-1555066337.jpg",
+      "sourcePage": "https://www.digitalspy.com/movies/a27253896/avengers-endgame-ending-explained-infinity-war-cliffhanger/",
+      "description": "Marvel Studios film still of the original six Avengers during the Battle of New York in The Avengers (2012), sourced via Digital Spy / Hearst; original 2000 × 1124; optimized progressive JPEG"
     }
   ],
   "fonts": [
